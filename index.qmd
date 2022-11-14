@@ -2,6 +2,5 @@
 title: "CGTInformaticsQuarto"
 ---
 
-This is a Quarto website.
+This is the home webpage for the Children's Hospital of Philadelphia's Cell & Gene Therapy Informatics blog site.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

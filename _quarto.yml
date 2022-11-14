@@ -4,11 +4,14 @@ project:
 
 website:
   title: "CGTInformaticsQuarto"
+  search: true
+  logo: cgt_informatics_bd_removed.png
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - blog_posts.qmd
 
 format:
   html:
