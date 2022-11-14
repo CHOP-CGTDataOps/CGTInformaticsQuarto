@@ -5,7 +5,7 @@ project:
 website:
   title: "CGTInformaticsQuarto"
   search: true
-  logo: cgt_informatics_bd_removed.png
+  logo: cgt_informatics_bg_removed.png
   navbar:
     left:
       - href: index.qmd
