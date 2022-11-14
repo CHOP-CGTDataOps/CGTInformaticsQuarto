@@ -11,7 +11,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - blog_posts.qmd
+      - href: blog_posts.qmd
+        text: Blog Posts
 
 format:
   html:
