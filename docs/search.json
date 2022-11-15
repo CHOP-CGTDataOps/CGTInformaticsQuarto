@@ -4,7 +4,7 @@
     "href": "posts/REDCapTidieR_v0.2.html",
     "title": "REDCapTidieR 0.2.0",
     "section": "",
-    "text": "[DRAFT]\nWe’re thrilled to announce the release of REDCapTidieR v0.2.0 on CRAN. REDCapTidieR provides an elegant way to import data from a REDCap database into an R environment.\nREDCapTidieR is led by a primary function, read_redcap_tidy, built on top of the streamlined API extraction processes provided by the REDCapR package. read_redcap_tidy does all the laborious work of taking complex REDCap databases and transforming them into manageable, tidy tables for easier processing with less start up time for analysts. The output provided is referred to as the supertibble, since the REDCap data is provided in a “tibble of tibbles”. In a supertibble output, each row represents a REDCap form/instrument containing a list column of the associated tibble."
+    "text": "We’re thrilled to announce the release of REDCapTidieR v0.2.0 on CRAN. REDCapTidieR provides an elegant way to import data from a REDCap database into an R environment.\nREDCapTidieR is led by a primary function, read_redcap_tidy, built on top of the streamlined API extraction processes provided by the REDCapR package. read_redcap_tidy does all the laborious work of taking complex REDCap databases and transforming them into manageable, tidy tables for easier processing with less start up time for analysts. The output provided is referred to as the supertibble, since the REDCap data is provided in a “tibble of tibbles”. In a supertibble output, each row represents a REDCap form/instrument containing a list column of the associated tibble."
   },
   {
     "objectID": "posts/REDCapTidieR_v0.2.html#expanding-the-supertibble-introducing-metadata",
@@ -46,20 +46,41 @@
     "href": "index.html",
     "title": "Welcome to CGT Informatics",
     "section": "",
-    "text": "This is the home webpage for the Children’s Hospital of Philadelphia’s Cell & Gene Therapy Informatics blog site."
+    "text": "This website serves as a repository for publicly available and open-source software, news, and publications."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About CGT Informatics",
     "section": "",
-    "text": "This is a work-in-progress site to host information related to CGT Informatics."
+    "text": "Accelerating breakthroughs in Cell and Gene Therapy through Data"
+  },
+  {
+    "objectID": "about.html#mission",
+    "href": "about.html#mission",
+    "title": "About CGT Informatics",
+    "section": "Mission",
+    "text": "Mission\nTo build systems that continuously deliver reliable, high-quality, and timely data to Cell and Gene Therapy clinicians and researchers in order to help clinical decision making, improve and automate quality operations, and accelerate Cell and Gene Therapy clinical research."
+  },
+  {
+    "objectID": "about.html#philosophy",
+    "href": "about.html#philosophy",
+    "title": "About CGT Informatics",
+    "section": "Philosophy",
+    "text": "Philosophy\n\nDeliver value incrementally, and with the shortest lead time possible\nOwn the entire value stream and take accountability for the outcome\nContinuously learn and improve\nMinimize waste, hardship, and drudgery"
+  },
+  {
+    "objectID": "about.html#members",
+    "href": "about.html#members",
+    "title": "About CGT Informatics",
+    "section": "Members",
+    "text": "Members\nCGT Informatics is comprised of the following members:\n\nStephan Kadauke, MD, PhD\nRichard Hanna\nEzra Porter"
   },
   {
     "objectID": "posts.html",
     "href": "posts.html",
     "title": "Posts & News",
     "section": "",
-    "text": "Stephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
+    "text": "Introducing numerous feature enhancements and improvements\n\n\n\n\n\n\n\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -2,5 +2,6 @@
 title: "Welcome to CGT Informatics"
 ---
 
-This is the home webpage for the Children's Hospital of Philadelphia's Cell & Gene Therapy Informatics blog site.
+Welcome to the home page for the Children's Hospital of Philadelphia's Cell & Gene Therapy Informatics site.
 
+This website serves as a repository for publicly available and open-source software, news, and publications. 

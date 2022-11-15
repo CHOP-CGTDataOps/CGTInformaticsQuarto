@@ -122,6 +122,7 @@ ul.task-list{list-style: none;}
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">REDCapTidieR 0.2.0</h1>
+<p class="subtitle lead">Introducing numerous feature enhancements and improvements</p>
 </div>
 
 
@@ -141,7 +142,6 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>[DRAFT]</p>
 <p>We’re thrilled to announce the release of <a href="https://chop-cgtdataops.github.io/REDCapTidieR/"><code>REDCapTidieR</code></a> v0.2.0 on CRAN. <code>REDCapTidieR</code> provides an elegant way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment.</p>
 <p><code>REDCapTidieR</code> is led by a primary function, <code>read_redcap_tidy</code>, built on top of the streamlined API extraction processes provided by the <a href="https://ouhscbbmc.github.io/REDCapR/"><code>REDCapR</code></a> package. <code>read_redcap_tidy</code> does all the laborious work of taking complex REDCap databases and transforming them into manageable, tidy tables for easier processing with less start up time for analysts. The output provided is referred to as the <strong>supertibble</strong>, since the REDCap data is provided in a “<code>tibble</code> of <code>tibble</code>s”. In a supertibble output, each row represents a REDCap form/instrument containing a <strong>list column</strong> of the associated <code>tibble</code>.</p>
 <section id="expanding-the-supertibble-introducing-metadata" class="level2">

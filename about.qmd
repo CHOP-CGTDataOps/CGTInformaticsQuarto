@@ -2,8 +2,29 @@
 title: "About CGT Informatics"
 image: img/cgt_informatics_bg_removed.png
 about: 
-  template: jolla
+  template: solana
   image-shape: rectangle
 ---
 
-This is a work-in-progress site to host information related to CGT Informatics.
+## Vision
+
+Accelerating breakthroughs in Cell and Gene Therapy through Data
+
+## Mission
+
+To build systems that continuously deliver reliable, high-quality, and timely data to Cell and Gene Therapy clinicians and researchers in order to help clinical decision making, improve and automate quality operations, and accelerate Cell and Gene Therapy clinical research.
+
+## Philosophy
+
+- Deliver value incrementally, and with the shortest lead time possible
+- Own the entire value stream and take accountability for the outcome
+- Continuously learn and improve
+- Minimize waste, hardship, and drudgery
+
+## Members
+
+CGT Informatics is comprised of the following members:
+
+- [Stephan Kadauke, MD, PhD](https://github.com/skadauke)
+- [Richard Hanna](https://github.com/rsh52)
+- [Ezra Porter](https://github.com/ezraporter)
