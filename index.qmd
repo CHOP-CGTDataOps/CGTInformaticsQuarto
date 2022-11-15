@@ -1,5 +1,5 @@
 ---
-title: "CGTInformaticsQuarto"
+title: "Welcome to CGT Informatics"
 ---
 
 This is the home webpage for the Children's Hospital of Philadelphia's Cell & Gene Therapy Informatics blog site.

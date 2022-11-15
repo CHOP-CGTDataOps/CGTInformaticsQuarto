@@ -4,26 +4,47 @@
     "href": "posts/REDCapTidieR_v0.2.html",
     "title": "REDCapTidieR 0.2.0",
     "section": "",
-    "text": "New metadata\nWIP\n\n\nIntroducing make_labelled\nWIP"
+    "text": "We’re thrilled to announce the release of REDCapTidieR v0.2.0 on CRAN. REDCapTidieR provides an elegant way to import data from a REDCap database into an R environment."
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.2.html#new-metadata",
+    "href": "posts/REDCapTidieR_v0.2.html#new-metadata",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "New metadata",
+    "text": "New metadata\nWIP"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.2.html#introducing-make_labelled",
+    "href": "posts/REDCapTidieR_v0.2.html#introducing-make_labelled",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "Introducing make_labelled",
+    "text": "Introducing make_labelled\nWIP"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.2.html#various-bug-fixes",
+    "href": "posts/REDCapTidieR_v0.2.html#various-bug-fixes",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "Various Bug Fixes",
+    "text": "Various Bug Fixes"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "CGTInformaticsQuarto",
+    "title": "Welcome to CGT Informatics",
     "section": "",
     "text": "This is the home webpage for the Children’s Hospital of Philadelphia’s Cell & Gene Therapy Informatics blog site."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About CGT Informatics",
     "section": "",
     "text": "This is a work-in-progress site to host information related to CGT Informatics."
   },
   {
     "objectID": "posts.html",
     "href": "posts.html",
-    "title": "CGT Informatics Posts",
+    "title": "Posts & News",
     "section": "",
     "text": "Stephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }

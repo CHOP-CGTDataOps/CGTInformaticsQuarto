@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "About CGT Informatics"
 image: img/cgt_informatics_bg_removed.png
 about: 
   template: jolla

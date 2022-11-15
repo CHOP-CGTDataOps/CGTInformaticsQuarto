@@ -1,5 +1,5 @@
 ---
-title: "CGT Informatics Posts"
+title: "Posts & News"
 listing:
   contents: posts
   sort: "date desc"
