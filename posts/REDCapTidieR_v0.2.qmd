@@ -1,0 +1,18 @@
+---
+title: REDCapTidieR 0.2.0
+image: img/REDCapTidieR.png
+author: Stephan Kadauke, Ezra Porter, Richard Hanna
+tags: 
+  - REDCap
+  - REDCapTidieR 
+---
+
+We're thrilled to announce the release of [`REDCapTidieR`](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN. `REDCapTidieR` provides an elegant way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment.
+
+# New metadata
+
+WIP
+
+# Introducing `make_labelled`
+
+WIP

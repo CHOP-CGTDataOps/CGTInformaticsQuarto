@@ -5,14 +5,19 @@ project:
 website:
   title: "CGTInformaticsQuarto"
   search: true
-  logo: cgt_informatics_bg_removed.png
+  description: CGT Informatics Quarto Site
   navbar:
+    logo: img/cgt_informatics_bg_removed.png
     left:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: blog_posts.qmd
-        text: Blog Posts
+      - href: posts.qmd
+        text: Posts
+    right:
+      - icon: github
+        href: https://github.com/CHOP-CGTDataOps
+        aria-label: GitHub
 
 format:
   html:

@@ -1,5 +1,9 @@
 ---
 title: "About"
+image: img/cgt_informatics_bg_removed.png
+about: 
+  template: jolla
+  image-shape: rectangle
 ---
 
 This is a work-in-progress site to host information related to CGT Informatics.

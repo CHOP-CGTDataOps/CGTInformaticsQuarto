@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "posts/REDCapTidieR_v0.2.html",
+    "href": "posts/REDCapTidieR_v0.2.html",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "",
+    "text": "New metadata\nWIP\n\n\nIntroducing make_labelled\nWIP"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CGTInformaticsQuarto",
@@ -14,10 +21,10 @@
     "text": "This is a work-in-progress site to host information related to CGT Informatics."
   },
   {
-    "objectID": "blog_posts.html",
-    "href": "blog_posts.html",
-    "title": "Blog Posts",
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "CGT Informatics Posts",
     "section": "",
-    "text": "No matching items"
+    "text": "Stephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }
 ]

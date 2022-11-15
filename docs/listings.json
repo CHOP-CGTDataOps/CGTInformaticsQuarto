@@ -1,6 +1,8 @@
 [
   {
-    "listing": "/blog_posts.html",
-    "items": []
+    "listing": "/posts.html",
+    "items": [
+      "/posts/REDCapTidieR_v0.2.html"
+    ]
   }
 ]
