@@ -7,22 +7,45 @@ tags:
   - REDCapTidieR 
 ---
 
+[DRAFT]
+
 We're thrilled to announce the release of [`REDCapTidieR`](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN. `REDCapTidieR` provides an elegant way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment.
 
+`REDCapTidieR` is led by a primary function, `read_redcap_tidy`, built on top of the streamlined API extraction processes provided by the [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/) package. `read_redcap_tidy` does all the laborious work of taking complex REDCap databases and transforming them into manageable, tidy tables for easier processing with less start up time for analysts. The output provided is referred to as the **supertibble**, since the REDCap data is provided in a "`tibble` of `tibble`s". In a supertibble output, each row represents a REDCap form/instrument containing a **list column** of the associated `tibble`.
+
+## Expanding the Supertibble: Introducing Metadata
+
+One of the primary advancements of `REDCapTidieR` in `v0.2.0` will be immediately apparent when viewing a supertibble output:
+
+<--- ADD GRAPHIC OF SUPERTIBBLE WITH METADATA HERE ---->
+
+Where in `0.1.*` the supertibble only provided three columns, we now have access to ___ new ones.
+
+<---- ADD DESCRIPTION OF ALL NEW COLUMNS HERE ---->
+
 ## New `read_redcap_tidy` Arguments
+
+To enhance and expand the capabilities of `read_redcap_tidy`, we've introduced two new arguments to pass to the API:
 
 - `forms`
 - `export_survey_fields`
 
-## New metadata
+You can now call specific `forms` from your database instead of defaulting to downloading the entire dataset. This can be especially useful for very large databases where full data downloads take up needless memory.
 
-WIP
+<---- ADD SAMPLE OUTPUT OF FORMS SPEC FROM CLASSIC DB HERE ---->
+
+### Support for Survey Fields
+
+We have also included default survey fields from the API:
+
+- `[instrument_name]_timestamp`
+- `redcap_survey_identifier`
+
+By default, these will appear for survey projects but can be turned off if desired by setting `export_survey_fields` to `FALSE`. Please refer to the REDCap documentation regarding behavior of these fields, especially survey identifiers as they require databases to be set up in special ways.
+
+<---- ADD SAMPLE SURVEY OUTPUT FROM CLASSIC DB HERE ---->
 
 ## Introducing `make_labelled`
-
-WIP
-
-## Support for Survey Fields
 
 WIP
 
