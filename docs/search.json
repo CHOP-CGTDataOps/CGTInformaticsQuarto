@@ -7,6 +7,13 @@
     "text": "We’re thrilled to announce the release of REDCapTidieR v0.2.0 on CRAN. REDCapTidieR provides an elegant way to import data from a REDCap database into an R environment."
   },
   {
+    "objectID": "posts/REDCapTidieR_v0.2.html#new-read_redcap_tidy-arguments",
+    "href": "posts/REDCapTidieR_v0.2.html#new-read_redcap_tidy-arguments",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "New read_redcap_tidy Arguments",
+    "text": "New read_redcap_tidy Arguments\n\nforms\nexport_survey_fields"
+  },
+  {
     "objectID": "posts/REDCapTidieR_v0.2.html#new-metadata",
     "href": "posts/REDCapTidieR_v0.2.html#new-metadata",
     "title": "REDCapTidieR 0.2.0",
@@ -21,11 +28,25 @@
     "text": "Introducing make_labelled\nWIP"
   },
   {
+    "objectID": "posts/REDCapTidieR_v0.2.html#support-for-survey-fields",
+    "href": "posts/REDCapTidieR_v0.2.html#support-for-survey-fields",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "Support for Survey Fields",
+    "text": "Support for Survey Fields\nWIP"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.2.html#performance-improvements-and-enhancements",
+    "href": "posts/REDCapTidieR_v0.2.html#performance-improvements-and-enhancements",
+    "title": "REDCapTidieR 0.2.0",
+    "section": "Performance Improvements and Enhancements",
+    "text": "Performance Improvements and Enhancements\n\nInternal function check_repeat_and_nonrepeat optimized\nInternal function distill_*_table_long optimized\nInternal function multi_choice_to_labels optimized\ncli implemented for all warnings and errors\nhttptest implementation in tests and vignettes"
+  },
+  {
     "objectID": "posts/REDCapTidieR_v0.2.html#various-bug-fixes",
     "href": "posts/REDCapTidieR_v0.2.html#various-bug-fixes",
     "title": "REDCapTidieR 0.2.0",
     "section": "Various Bug Fixes",
-    "text": "Various Bug Fixes"
+    "text": "Various Bug Fixes\n\nextract_* bug fixed to align with new metadata outputs\nREDCap form_name order preservation bug fixed\ntidyselect warnings addressed with tidyselect v1.2.0\nrenv CI cacheing enabled for GitHub Actions optimization"
   },
   {
     "objectID": "index.html",

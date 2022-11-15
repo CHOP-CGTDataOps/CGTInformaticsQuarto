@@ -105,8 +105,11 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#new-metadata" id="toc-new-metadata" class="nav-link active" data-scroll-target="#new-metadata">New metadata</a></li>
+  <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link active" data-scroll-target="#new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> Arguments</a></li>
+  <li><a href="#new-metadata" id="toc-new-metadata" class="nav-link" data-scroll-target="#new-metadata">New metadata</a></li>
   <li><a href="#introducing-make_labelled" id="toc-introducing-make_labelled" class="nav-link" data-scroll-target="#introducing-make_labelled">Introducing <code>make_labelled</code></a></li>
+  <li><a href="#support-for-survey-fields" id="toc-support-for-survey-fields" class="nav-link" data-scroll-target="#support-for-survey-fields">Support for Survey Fields</a></li>
+  <li><a href="#performance-improvements-and-enhancements" id="toc-performance-improvements-and-enhancements" class="nav-link" data-scroll-target="#performance-improvements-and-enhancements">Performance Improvements and Enhancements</a></li>
   <li><a href="#various-bug-fixes" id="toc-various-bug-fixes" class="nav-link" data-scroll-target="#various-bug-fixes">Various Bug Fixes</a></li>
   </ul>
 </nav>
@@ -137,6 +140,13 @@ ul.task-list{list-style: none;}
 </header>
 
 <p>We’re thrilled to announce the release of <a href="https://chop-cgtdataops.github.io/REDCapTidieR/"><code>REDCapTidieR</code></a> v0.2.0 on CRAN. <code>REDCapTidieR</code> provides an elegant way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment.</p>
+<section id="new-read_redcap_tidy-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> Arguments</h2>
+<ul>
+<li><code>forms</code></li>
+<li><code>export_survey_fields</code></li>
+</ul>
+</section>
 <section id="new-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="new-metadata">New metadata</h2>
 <p>WIP</p>
@@ -145,8 +155,28 @@ ul.task-list{list-style: none;}
 <h2 class="anchored" data-anchor-id="introducing-make_labelled">Introducing <code>make_labelled</code></h2>
 <p>WIP</p>
 </section>
+<section id="support-for-survey-fields" class="level2">
+<h2 class="anchored" data-anchor-id="support-for-survey-fields">Support for Survey Fields</h2>
+<p>WIP</p>
+</section>
+<section id="performance-improvements-and-enhancements" class="level2">
+<h2 class="anchored" data-anchor-id="performance-improvements-and-enhancements">Performance Improvements and Enhancements</h2>
+<ul>
+<li>Internal function <code>check_repeat_and_nonrepeat</code> optimized</li>
+<li>Internal function <code>distill_*_table_long</code> optimized</li>
+<li>Internal function <code>multi_choice_to_labels</code> optimized</li>
+<li><code>cli</code> implemented for all warnings and errors</li>
+<li><code>httptest</code> implementation in tests and vignettes</li>
+</ul>
+</section>
 <section id="various-bug-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="various-bug-fixes">Various Bug Fixes</h2>
+<ul>
+<li><code>extract_*</code> bug fixed to align with new metadata outputs</li>
+<li>REDCap <code>form_name</code> order preservation bug fixed</li>
+<li><code>tidyselect</code> warnings addressed with <a href="https://tidyselect.r-lib.org/news/index.html#lifecycle-changes-1-2-0"><code>tidyselect v1.2.0</code></a></li>
+<li><code>renv</code> CI cacheing enabled for GitHub Actions optimization</li>
+</ul>
 
 
 </section>

@@ -9,6 +9,11 @@ tags:
 
 We're thrilled to announce the release of [`REDCapTidieR`](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN. `REDCapTidieR` provides an elegant way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment.
 
+## New `read_redcap_tidy` Arguments
+
+- `forms`
+- `export_survey_fields`
+
 ## New metadata
 
 WIP
@@ -17,4 +22,21 @@ WIP
 
 WIP
 
+## Support for Survey Fields
+
+WIP
+
+## Performance Improvements and Enhancements
+
+- Internal function `check_repeat_and_nonrepeat` optimized
+- Internal function `distill_*_table_long` optimized
+- Internal function `multi_choice_to_labels` optimized
+- `cli` implemented for all warnings and errors
+- `httptest` implementation in tests and vignettes
+
 ## Various Bug Fixes
+
+- `extract_*` bug fixed to align with new metadata outputs
+- REDCap `form_name` order preservation bug fixed
+- `tidyselect` warnings addressed with [`tidyselect v1.2.0`](https://tidyselect.r-lib.org/news/index.html#lifecycle-changes-1-2-0)
+- `renv` CI cacheing enabled for GitHub Actions optimization
