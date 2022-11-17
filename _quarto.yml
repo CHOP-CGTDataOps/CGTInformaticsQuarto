@@ -26,7 +26,8 @@ website:
 format:
   html:
     theme: litera
-    css: styles.css
+    title-block-banner: false
+    highlight-style: github
     toc: true
 
 

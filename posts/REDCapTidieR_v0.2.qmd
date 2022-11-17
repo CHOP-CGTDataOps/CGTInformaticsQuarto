@@ -13,11 +13,37 @@ We're thrilled to announce the release of [`REDCapTidieR`](https://chop-cgtdatao
 
 One of the primary advancements of `REDCapTidieR` in `v0.2.0` will be immediately apparent when viewing a supertibble output:
 
-<--- ADD GRAPHIC OF SUPERTIBBLE WITH METADATA HERE ---->
+```{r load env vars and DT function}
+#| include: false
+# library(DT)
+library(dplyr)
 
-Where in `0.1.*` the supertibble only provided three columns, we now have access to ___ new ones.
+token <- Sys.getenv("SUPERHEROES_REDCAP_API")
+redcap_uri <- Sys.getenv("REDCAP_URI")
+# custom_display <- function(x){datatable(data = x, rownames = FALSE, options = list(
+#     dom = 't'
+#   ))}
+```
 
-<---- ADD DESCRIPTION OF ALL NEW COLUMNS HERE ---->
+```{r display supertibble}
+#| include: true
+#| echo: true
+#| cache: true
+library(REDCapTidieR)
+
+superheroes_tidy <- read_redcap_tidy(redcap_uri, token)
+
+superheroes_tidy %>% 
+  dplyr::glimpse()
+```
+
+Where in `0.1` the supertibble only provided three columns, we now have access to **six** new ones. These include:
+
+- `redcap_form_label`: The form label that corresponds to the form name
+- `redcap_metadata`: REDCap metadata associated with the form
+- `data_rows`/`data_cols`: Row and column counts
+- `data_size`: Size of the `redcap_data` corresponding to the form, given in [`lobstr_bytes`](https://lobstr.r-lib.org/)
+- `data_na_pct`: The percentage of missing data in the corresponding `redcap_data`
 
 ## New `read_redcap_tidy` Arguments
 
@@ -28,7 +54,15 @@ To enhance and expand the capabilities of `read_redcap_tidy`, we've introduced t
 
 You can now call specific `forms` from your database instead of defaulting to downloading the entire dataset. This can be especially useful for very large databases where full data downloads take up needless memory.
 
-<---- ADD SAMPLE OUTPUT OF FORMS SPEC FROM CLASSIC DB HERE ---->
+```{r forms example}
+#| include: true
+#| echo: true
+#| cache: true
+superheroes_powers <- read_redcap_tidy(redcap_uri, 
+                                       token, 
+                                       forms = "super_hero_powers")
+superheroes_powers
+```
 
 ### Support for Survey Fields
 
@@ -39,7 +73,26 @@ We have also included default survey fields from the API:
 
 By default, these will appear for survey projects but can be turned off if desired by setting `export_survey_fields` to `FALSE`. Please refer to the REDCap documentation regarding behavior of these fields, especially survey identifiers as they require databases to be set up in special ways.
 
-<---- ADD SAMPLE SURVEY OUTPUT FROM CLASSIC DB HERE ---->
+```{r survey token}
+#| include: false
+#| echo: false
+survey_token <- Sys.getenv("REDCAPTIDIER_CLASSIC_API")
+```
+
+```{r survey example}
+#| include: true
+#| echo: true
+#| cache: true
+survey_database <- read_redcap_tidy(redcap_uri,
+                                    survey_token,
+                                    forms = "survey",
+                                    export_survey_fields = TRUE)
+
+survey_database$redcap_data[[1]] %>% 
+  dplyr::glimpse()
+```   
+
+Note the inclusion of the `redcap_survey_identifier` and `survey_timestamp` columns.
 
 ## Introducing `make_labelled`
 

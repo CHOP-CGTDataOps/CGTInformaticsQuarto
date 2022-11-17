@@ -16,6 +16,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -56,7 +119,6 @@ ul.task-list{list-style: none;}
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -147,9 +209,35 @@ ul.task-list{list-style: none;}
 <section id="expanding-the-supertibble-introducing-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="expanding-the-supertibble-introducing-metadata">Expanding the Supertibble: Introducing Metadata</h2>
 <p>One of the primary advancements of <code>REDCapTidieR</code> in <code>v0.2.0</code> will be immediately apparent when viewing a supertibble output:</p>
-<p>&lt;— ADD GRAPHIC OF SUPERTIBBLE WITH METADATA HERE —-&gt;</p>
-<p>Where in <code>0.1.*</code> the supertibble only provided three columns, we now have access to ___ new ones.</p>
-<p>&lt;—- ADD DESCRIPTION OF ALL NEW COLUMNS HERE —-&gt;</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_52a6de80de6c0954206f8613606e3099">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes_tidy <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, token)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>superheroes_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2
+Columns: 9
+$ redcap_form_name  &lt;chr&gt; "heroes_information", "super_hero_powers"
+$ redcap_form_label &lt;chr&gt; "Heroes Information", "Super Hero Powers"
+$ redcap_data       &lt;list&gt; [&lt;tbl_df[734 x 12]&gt;], [&lt;tbl_df[5966 x 4]&gt;]
+$ redcap_metadata   &lt;list&gt; [&lt;tbl_df[11 x 16]&gt;], [&lt;tbl_df[2 x 16]&gt;]
+$ structure         &lt;chr&gt; "nonrepeating", "repeating"
+$ data_rows         &lt;int&gt; 734, 5966
+$ data_cols         &lt;int&gt; 12, 4
+$ data_size         &lt;lbstr_by&gt; 123.24 kB, 180.21 kB
+$ data_na_pct       &lt;dbl&gt; 0.002316076, 0.000000000</code></pre>
+</div>
+</div>
+<p>Where in <code>0.1</code> the supertibble only provided three columns, we now have access to <strong>six</strong> new ones. These include:</p>
+<ul>
+<li><code>redcap_form_label</code>: The form label that corresponds to the form name</li>
+<li><code>redcap_metadata</code>: REDCap metadata associated with the form</li>
+<li><code>data_rows</code>/<code>data_cols</code>: Row and column counts</li>
+<li><code>data_size</code>: Size of the <code>redcap_data</code> corresponding to the form, given in <a href="https://lobstr.r-lib.org/"><code>lobstr_bytes</code></a></li>
+<li><code>data_na_pct</code>: The percentage of missing data in the corresponding <code>redcap_data</code></li>
+</ul>
 </section>
 <section id="new-read_redcap_tidy-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> Arguments</h2>
@@ -159,7 +247,21 @@ ul.task-list{list-style: none;}
 <li><code>export_survey_fields</code></li>
 </ul>
 <p>You can now call specific <code>forms</code> from your database instead of defaulting to downloading the entire dataset. This can be especially useful for very large databases where full data downloads take up needless memory.</p>
-<p>&lt;—- ADD SAMPLE OUTPUT OF FORMS SPEC FROM CLASSIC DB HERE —-&gt;</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_b244812831881f41ddfd8fd2ed12a26c">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                       token, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>superheroes_powers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 9
+  redcap_for…¹ redca…² redcap…³ redcap…⁴ struc…⁵ data_…⁶ data_…⁷ data_…⁸ data_…⁹
+  &lt;chr&gt;        &lt;chr&gt;   &lt;list&gt;   &lt;list&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;int&gt; &lt;lbstr&gt;   &lt;dbl&gt;
+1 super_hero_… Super … &lt;tibble&gt; &lt;tibble&gt; repeat…    5966       4 180.21…       0
+# … with abbreviated variable names ¹​redcap_form_name, ²​redcap_form_label,
+#   ³​redcap_data, ⁴​redcap_metadata, ⁵​structure, ⁶​data_rows, ⁷​data_cols,
+#   ⁸​data_size, ⁹​data_na_pct</code></pre>
+</div>
+</div>
 <section id="support-for-survey-fields" class="level3">
 <h3 class="anchored" data-anchor-id="support-for-survey-fields">Support for Survey Fields</h3>
 <p>We have also included default survey fields from the API:</p>
@@ -168,7 +270,29 @@ ul.task-list{list-style: none;}
 <li><code>redcap_survey_identifier</code></li>
 </ul>
 <p>By default, these will appear for survey projects but can be turned off if desired by setting <code>export_survey_fields</code> to <code>FALSE</code>. Please refer to the REDCap documentation regarding behavior of these fields, especially survey identifiers as they require databases to be set up in special ways.</p>
-<p>&lt;—- ADD SAMPLE SURVEY OUTPUT FROM CLASSIC DB HERE —-&gt;</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/survey example_8748c4ca120964480ae5829e4e03bf36">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                    survey_token,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">forms =</span> <span class="st">"survey"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">export_survey_fields =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>survey_database<span class="sc">$</span>redcap_data[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4
+Columns: 9
+$ record_id                &lt;dbl&gt; 1, 2, 3, 4
+$ survey_yesno             &lt;lgl&gt; TRUE, FALSE, NA, NA
+$ survey_radio             &lt;fct&gt; Choice 1, Choice 2, NA, NA
+$ survey_checkbox___one    &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE
+$ survey_checkbox___two    &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE
+$ survey_checkbox___three  &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE
+$ survey_timestamp         &lt;dttm&gt; 2022-11-09 10:33:35, NA, NA, NA
+$ redcap_survey_identifier &lt;lgl&gt; NA, NA, NA, NA
+$ form_status_complete     &lt;fct&gt; Complete, Incomplete, Incomplete, Incomplete</code></pre>
+</div>
+</div>
+<p>Note the inclusion of the <code>redcap_survey_identifier</code> and <code>survey_timestamp</code> columns.</p>
 </section>
 </section>
 <section id="introducing-make_labelled" class="level2">
