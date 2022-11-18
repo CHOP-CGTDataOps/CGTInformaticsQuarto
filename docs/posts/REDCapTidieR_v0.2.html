@@ -168,11 +168,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link active" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
-  <li><a href="#redcaptidier-labelled" id="toc-redcaptidier-labelled" class="nav-link" data-scroll-target="#redcaptidier-labelled">REDCapTidier ❤️ labelled</a></li>
+  <li><a href="#redcaptidier-labelled" id="toc-redcaptidier-labelled" class="nav-link" data-scroll-target="#redcaptidier-labelled">REDCapTidieR ❤️ labelled</a></li>
   <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link" data-scroll-target="#new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> arguments</a>
   <ul class="collapse">
-  <li><a href="#retrieve-a-subset-of-instruments" id="toc-retrieve-a-subset-of-instruments" class="nav-link" data-scroll-target="#retrieve-a-subset-of-instruments">Retrieve a subset of instruments</a></li>
-  <li><a href="#support-for-surveys" id="toc-support-for-surveys" class="nav-link" data-scroll-target="#support-for-surveys">Support for surveys</a></li>
+  <li><a href="#retrieve-data-from-a-subset-of-instruments" id="toc-retrieve-data-from-a-subset-of-instruments" class="nav-link" data-scroll-target="#retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</a></li>
+  <li><a href="#support-for-redcap-surveys" id="toc-support-for-redcap-surveys" class="nav-link" data-scroll-target="#support-for-redcap-surveys">Support for REDCap surveys</a></li>
   </ul></li>
   <li><a href="#performance-improvements-and-enhancements" id="toc-performance-improvements-and-enhancements" class="nav-link" data-scroll-target="#performance-improvements-and-enhancements">Performance improvements and enhancements</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug fixes</a></li>
@@ -241,7 +241,7 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 </ul>
 </section>
 <section id="redcaptidier-labelled" class="level2">
-<h2 class="anchored" data-anchor-id="redcaptidier-labelled">REDCapTidier ❤️ labelled</h2>
+<h2 class="anchored" data-anchor-id="redcaptidier-labelled">REDCapTidieR ❤️ labelled</h2>
 <p>The <a href="https://larmarange.github.io/labelled/">labelled</a> package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi’s blog post <a href="https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/">The case for variable labels in R</a> to find out why you might want to use them.</p>
 <p>REDCapTidieR now provides <code>make_labelled</code>, a high-level function that attaches labels to the supertibble and the tibbles it contains:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/unnamed-chunk-1_d22474d61cf232f053483ad9def01a9d">
@@ -260,8 +260,8 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 <li><code>forms</code></li>
 <li><code>export_survey_fields</code></li>
 </ul>
-<section id="retrieve-a-subset-of-instruments" class="level3">
-<h3 class="anchored" data-anchor-id="retrieve-a-subset-of-instruments">Retrieve a subset of instruments</h3>
+<section id="retrieve-data-from-a-subset-of-instruments" class="level3">
+<h3 class="anchored" data-anchor-id="retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</h3>
 <p>You can now download specific <code>forms</code> from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_901eb7a829d1f116350adcabf0dff09f">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
@@ -283,10 +283,9 @@ $ data_size         &lt;lbstr_by&gt; 180.21 kB
 $ data_na_pct       &lt;dbl&gt; 0</code></pre>
 </div>
 </div>
-<p>The implementation of the <code>forms</code> argument in <code>read_redcap_tidy</code> addresses an issue in which the REDCap API doesn’t return record identifiers unless the first form is among the forms requested.</p>
 </section>
-<section id="support-for-surveys" class="level3">
-<h3 class="anchored" data-anchor-id="support-for-surveys">Support for surveys</h3>
+<section id="support-for-redcap-surveys" class="level3">
+<h3 class="anchored" data-anchor-id="support-for-redcap-surveys">Support for REDCap surveys</h3>
 <p>Instruments that are used as surveys generate additional data fields:</p>
 <ul>
 <li><code>[instrument_name]_timestamp</code>: the time at which the survey was competed</li>

@@ -45,7 +45,7 @@ REDCapTidieR 0.2.0 provides the following new columns:
 -   `data_size`: Size of the `redcap_data` tibble in memory
 -   `data_na_pct`: The percentage of missing data in the corresponding `redcap_data`
 
-## REDCapTidier ❤️ labelled
+## REDCapTidieR ❤️ labelled
 
 The [labelled](https://larmarange.github.io/labelled/) package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi's blog post [The case for variable labels in R](https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/) to find out why you might want to use them.
 
@@ -72,7 +72,7 @@ To enhance and expand the capabilities of `read_redcap_tidy`, we've introduced t
 -   `forms`
 -   `export_survey_fields`
 
-### Retrieve a subset of instruments
+### Retrieve data from a subset of instruments
 
 You can now download specific `forms` from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.
 
@@ -87,9 +87,7 @@ superheroes_powers |>
   dplyr::glimpse()
 ```
 
-The implementation of the `forms` argument in `read_redcap_tidy` addresses an issue in which the REDCap API doesn't return record identifiers unless the first form is among the forms requested.
-
-### Support for surveys
+### Support for REDCap surveys
 
 Instruments that are used as surveys generate additional data fields:
 
