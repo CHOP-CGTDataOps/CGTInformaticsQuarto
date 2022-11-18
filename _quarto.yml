@@ -17,7 +17,7 @@ website:
         text: Posts
     right:
       - icon: github
-        href: https://github.com/CHOP-CGTDataOps
+        href: https://github.com/CHOP-CGTInformatics
         aria-label: GitHub
   page-footer:
     center:

@@ -1,3 +1,3 @@
 # CGTInformaticsQuarto
 
-This repository services the [CGT Informatics Quarto site](https://chop-cgtdataops.github.io/CGTInformaticsQuarto/).
+This repository services the [CGT Informatics Quarto site](https://chop-cgtinformatics.github.io/CGTInformaticsQuarto/).

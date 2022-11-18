@@ -4,9 +4,9 @@ image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
 ---
 
-We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
+We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
 
-The workhorse of REDCapTidieR is the `read_redcap_tidy()` function which uses [REDCapR](https://ouhscbbmc.github.io/REDCapR/) to issue API calls against a REDCap database and then cleans up what's returned to make it easy to use. `read_redcap_tidy` returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
+The workhorse of REDCapTidieR is the [`read_redcap_tidy()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) function which uses [REDCapR](https://ouhscbbmc.github.io/REDCapR/) to issue API calls against a REDCap database and then cleans up what's returned to make it easy to use. [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
 
 ## Hello metadata!
 
@@ -49,7 +49,7 @@ REDCapTidieR 0.2.0 provides the following new columns:
 
 The [labelled](https://larmarange.github.io/labelled/) package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi's blog post [The case for variable labels in R](https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/) to find out why you might want to use them.
 
-REDCapTidieR now provides `make_labelled`, a high-level function that attaches labels to the supertibble and the tibbles it contains:
+REDCapTidieR now provides [`make_labelled`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/make_labelled.html), a high-level function that attaches labels to the supertibble and the tibbles it contains:
 
 ```{r}
 #| cache: true
@@ -65,9 +65,9 @@ While the variable labels in the supertibble are pre-defined, variable labels in
 
 ![](images/labelled_tibble.png){fig-alt="Labelled tibble"}
 
-## New `read_redcap_tidy` arguments
+## New [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) arguments
 
-To enhance and expand the capabilities of `read_redcap_tidy`, we've introduced two new arguments to pass to the API:
+To enhance and expand the capabilities of [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html), we've introduced two new arguments to pass to the API:
 
 -   `forms`
 -   `export_survey_fields`
@@ -94,7 +94,7 @@ Instruments that are used as surveys generate additional data fields:
 -   `[instrument_name]_timestamp`: the time at which the survey was competed
 -   `redcap_survey_identifier`: the participant identifier (this will be `NA` if the Participant Identifier feature in REDCap is disabled)
 
-By default, `read_redcap_tidy` will now return these fields if the instrument is used as a survey. 
+By default, [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) will now return these fields if the instrument is used as a survey. 
 
 ```{r survey token}
 #| include: false

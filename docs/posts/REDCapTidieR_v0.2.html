@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/CHOP-CGTDataOps"><i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/CHOP-CGTInformatics"><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
  </a>
   </li>  
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link active" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
   <li><a href="#redcaptidier-labelled" id="toc-redcaptidier-labelled" class="nav-link" data-scroll-target="#redcaptidier-labelled">REDCapTidieR ❤️ labelled</a></li>
-  <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link" data-scroll-target="#new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> arguments</a>
+  <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link" data-scroll-target="#new-read_redcap_tidy-arguments">New <span><code>read_redcap_tidy</code></span> arguments</a>
   <ul class="collapse">
   <li><a href="#retrieve-data-from-a-subset-of-instruments" id="toc-retrieve-data-from-a-subset-of-instruments" class="nav-link" data-scroll-target="#retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</a></li>
   <li><a href="#support-for-redcap-surveys" id="toc-support-for-redcap-surveys" class="nav-link" data-scroll-target="#support-for-redcap-surveys">Support for REDCap surveys</a></li>
@@ -204,8 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>We’re thrilled to announce the release of <a href="https://chop-cgtdataops.github.io/REDCapTidieR/">REDCapTidieR</a> v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment. You can install the current version from CRAN using <code>install.packages("REDCapTidieR")</code>.</p>
-<p>The workhorse of REDCapTidieR is the <code>read_redcap_tidy()</code> function which uses <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> to issue API calls against a REDCap database and then cleans up what’s returned to make it easy to use. <code>read_redcap_tidy</code> returns a special object, the <strong>supertibble</strong>, which contains data and metadata in neatly organized <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy</a> tibbles.</p>
+<p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment. You can install the current version from CRAN using <code>install.packages("REDCapTidieR")</code>.</p>
+<p>The workhorse of REDCapTidieR is the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy()</code></a> function which uses <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> to issue API calls against a REDCap database and then cleans up what’s returned to make it easy to use. <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> returns a special object, the <strong>supertibble</strong>, which contains data and metadata in neatly organized <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy</a> tibbles.</p>
 <section id="hello-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="hello-metadata">Hello metadata!</h2>
 <p>A key change to REDCapTidieR in v0.2.0 is that the supertibble now includes a lot of additional instrument-level metadata.</p>
@@ -243,7 +243,7 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 <section id="redcaptidier-labelled" class="level2">
 <h2 class="anchored" data-anchor-id="redcaptidier-labelled">REDCapTidieR ❤️ labelled</h2>
 <p>The <a href="https://larmarange.github.io/labelled/">labelled</a> package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi’s blog post <a href="https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/">The case for variable labels in R</a> to find out why you might want to use them.</p>
-<p>REDCapTidieR now provides <code>make_labelled</code>, a high-level function that attaches labels to the supertibble and the tibbles it contains:</p>
+<p>REDCapTidieR now provides <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/make_labelled.html"><code>make_labelled</code></a>, a high-level function that attaches labels to the supertibble and the tibbles it contains:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/unnamed-chunk-1_d22474d61cf232f053483ad9def01a9d">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_labelled <span class="ot">&lt;-</span> superheroes <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_labelled</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -254,8 +254,8 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 <p><img src="images/labelled_tibble.png" class="img-fluid" alt="Labelled tibble"></p>
 </section>
 <section id="new-read_redcap_tidy-arguments" class="level2">
-<h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <code>read_redcap_tidy</code> arguments</h2>
-<p>To enhance and expand the capabilities of <code>read_redcap_tidy</code>, we’ve introduced two new arguments to pass to the API:</p>
+<h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> arguments</h2>
+<p>To enhance and expand the capabilities of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a>, we’ve introduced two new arguments to pass to the API:</p>
 <ul>
 <li><code>forms</code></li>
 <li><code>export_survey_fields</code></li>
@@ -291,7 +291,7 @@ $ data_na_pct       &lt;dbl&gt; 0</code></pre>
 <li><code>[instrument_name]_timestamp</code>: the time at which the survey was competed</li>
 <li><code>redcap_survey_identifier</code>: the participant identifier (this will be <code>NA</code> if the Participant Identifier feature in REDCap is disabled)</li>
 </ul>
-<p>By default, <code>read_redcap_tidy</code> will now return these fields if the instrument is used as a survey.</p>
+<p>By default, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> will now return these fields if the instrument is used as a survey.</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/survey example_e128e21a23a87557f175b4d00541fb1a">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                    survey_token,</span>
