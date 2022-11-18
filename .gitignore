@@ -1,2 +1,4 @@
 /.quarto/
 .Rproj.user
+.Renviron
+.DS_Store

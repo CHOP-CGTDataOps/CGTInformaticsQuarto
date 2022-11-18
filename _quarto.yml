@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "CGT Informatics"
+  title: "Cell and Gene Therapy Informatics"
   search: true
   description: CGT Informatics Quarto Site
   navbar:
@@ -25,7 +25,7 @@ website:
 
 format:
   html:
-    theme: litera
+    theme: simplex
     title-block-banner: false
     highlight-style: github
     toc: true

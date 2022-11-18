@@ -1,17 +1,16 @@
 ---
-title: REDCapTidieR 0.2.0
-subtitle: Introducing numerous feature enhancements and improvements
-image: img/REDCapTidieR.png
+title: REDCapTidieR 0.2.0 🦃
+image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
 ---
 
-We're thrilled to announce the release of [`REDCapTidieR`](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN. `REDCapTidieR` provides an elegant way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment.
+We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
 
-`REDCapTidieR` is led by a primary function, `read_redcap_tidy`, built on top of the streamlined API extraction processes provided by the [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/) package. `read_redcap_tidy` does all the laborious work of taking complex REDCap databases and transforming them into manageable, tidy tables for easier processing with less start up time for analysts. The output provided is referred to as the **supertibble**, since the REDCap data is provided in a "`tibble` of `tibble`s". In a supertibble output, each row represents a REDCap form/instrument containing a **list column** of the associated `tibble`.
+The workhorse of REDCapTidieR is the `read_redcap_tidy()` function which builds upon [REDCapR](https://ouhscbbmc.github.io/REDCapR/). `read_redcap_tidy` returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
 
-## Expanding the Supertibble: Introducing Metadata
+## Hello metadata!
 
-One of the primary advancements of `REDCapTidieR` in `v0.2.0` will be immediately apparent when viewing a supertibble output:
+A key change to REDCapTidieR in v0.2.0 is that the supertibble now includes a lot of additional instrument-level metadata.
 
 ```{r load env vars and DT function}
 #| include: false
@@ -31,28 +30,51 @@ redcap_uri <- Sys.getenv("REDCAP_URI")
 #| cache: true
 library(REDCapTidieR)
 
-superheroes_tidy <- read_redcap_tidy(redcap_uri, token)
+superheroes <- read_redcap_tidy(redcap_uri, token)
 
-superheroes_tidy %>% 
+superheroes |>
   dplyr::glimpse()
 ```
 
-Where in `0.1` the supertibble only provided three columns, we now have access to **six** new ones. These include:
+REDCapTidieR 0.2.0 provides the following new columns:
 
-- `redcap_form_label`: The form label that corresponds to the form name
-- `redcap_metadata`: REDCap metadata associated with the form
-- `data_rows`/`data_cols`: Row and column counts
-- `data_size`: Size of the `redcap_data` corresponding to the form, given in [`lobstr_bytes`](https://lobstr.r-lib.org/)
-- `data_na_pct`: The percentage of missing data in the corresponding `redcap_data`
+-   `redcap_form_label`: The instrument's human-readable label
+-   `redcap_metadata`: REDCap metadata associated with the instrument
+-   `redcap_events`: Events and arms associated with this instrument (for longitudinal projects only)
+-   `data_rows`, `data_cols`: Row and column counts of `redcap_data`
+-   `data_size`: Size of the `redcap_data` tibble in memory
+-   `data_na_pct`: The percentage of missing data in the corresponding `redcap_data`
 
-## New `read_redcap_tidy` Arguments
+## REDCapTidier ❤️ labelled
+
+The [labelled](https://larmarange.github.io/labelled/) package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi's blog post [The case for variable labels in R](https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/) to find out why you might want to use them.
+
+REDCapTidieR now provides `make_labelled`, a high-level function that attaches labels to the supertibble and the tibbles it contains:
+
+```{r}
+#| cache: true
+superheroes_labelled <- superheroes |>
+  make_labelled()
+```
+
+In the RStudio Viewer, variable labels appear below each variable name. This makes it easy to inspect the contents of the supertibble:
+
+![](images/labelled_supertibble.png){fig-alt="Labelled supertibble"}
+
+While the variable labels in the supertibble are pre-defined, variable labels in the data tibbles (in `redcap_data`) are derived from the REDCap field labels:
+
+![](images/labelled_tibble.png){fig-alt="Labelled tibble"}
+
+## New `read_redcap_tidy` arguments
 
 To enhance and expand the capabilities of `read_redcap_tidy`, we've introduced two new arguments to pass to the API:
 
-- `forms`
-- `export_survey_fields`
+-   `forms`
+-   `export_survey_fields`
 
-You can now call specific `forms` from your database instead of defaulting to downloading the entire dataset. This can be especially useful for very large databases where full data downloads take up needless memory.
+### Retrieve a subset of instruments
+
+You can now download specific `forms` from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.
 
 ```{r forms example}
 #| include: true
@@ -61,17 +83,20 @@ You can now call specific `forms` from your database instead of defaulting to do
 superheroes_powers <- read_redcap_tidy(redcap_uri, 
                                        token, 
                                        forms = "super_hero_powers")
-superheroes_powers
+superheroes_powers |> 
+  dplyr::glimpse()
 ```
 
-### Support for Survey Fields
+The implementation of the `forms` argument in `read_redcap_tidy` addresses an issue in which the REDCap API doesn't return record identifiers unless the first form is among the forms requested.
 
-We have also included default survey fields from the API:
+### Support for surveys
 
-- `[instrument_name]_timestamp`
-- `redcap_survey_identifier`
+Instruments that are used as surveys generate additional data fields:
 
-By default, these will appear for survey projects but can be turned off if desired by setting `export_survey_fields` to `FALSE`. Please refer to the REDCap documentation regarding behavior of these fields, especially survey identifiers as they require databases to be set up in special ways.
+-   `[instrument_name]_timestamp`
+-   `redcap_survey_identifier`
+
+By default, `read_redcap_tidy` will now return these fields if the instrument is used as a survey. 
 
 ```{r survey token}
 #| include: false
@@ -88,27 +113,21 @@ survey_database <- read_redcap_tidy(redcap_uri,
                                     forms = "survey",
                                     export_survey_fields = TRUE)
 
-survey_database$redcap_data[[1]] %>% 
+survey_database$redcap_data[[1]] |> 
   dplyr::glimpse()
-```   
+```
 
 Note the inclusion of the `redcap_survey_identifier` and `survey_timestamp` columns.
 
-## Introducing `make_labelled`
+## Performance improvements and enhancements
 
-WIP
+-   Increased execution time by >2.5X by optimizing internal functions `check_repeat_and_nonrepeat`, `distill_*_table_long`, and `multi_choice_to_labels`
+-   All warnings and error messages are now produced using `cli`
+-   Tests and vignettes now use `httptest` to mock and cache REDCap API calls
+-   Replaced deprecated `.data` pronoun in tidyselect expressions
 
-## Performance Improvements and Enhancements
+## Bug fixes
 
-- Internal function `check_repeat_and_nonrepeat` optimized
-- Internal function `distill_*_table_long` optimized
-- Internal function `multi_choice_to_labels` optimized
-- `cli` implemented for all warnings and errors
-- `httptest` implementation in tests and vignettes
-
-## Various Bug Fixes
-
-- `extract_*` bug fixed to align with new metadata outputs
-- REDCap `form_name` order preservation bug fixed
-- `tidyselect` warnings addressed with [`tidyselect v1.2.0`](https://tidyselect.r-lib.org/news/index.html#lifecycle-changes-1-2-0)
-- `renv` CI cacheing enabled for GitHub Actions optimization
+-   Fixed a bug in which similarly named variables could be duplicated
+-   Order of instruments in the supertibble is now the same as the order of instruments in REDCap
+-   Fixed an issue in which `extract_*` functions returned `NULL` instead of the expected tibbles

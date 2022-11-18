@@ -1,5 +1,5 @@
 ---
-title: "Welcome to CGT Informatics"
+title: "Welcome to CGT Informatics!"
 ---
 
 ![](img/cgt_informatics_bg_removed.png){fig-align="center" width="250"}
