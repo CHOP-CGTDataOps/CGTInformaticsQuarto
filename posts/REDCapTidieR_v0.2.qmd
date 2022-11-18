@@ -6,7 +6,7 @@ author: Stephan Kadauke, Ezra Porter, Richard Hanna
 
 We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
 
-The workhorse of REDCapTidieR is the `read_redcap_tidy()` function which builds upon [REDCapR](https://ouhscbbmc.github.io/REDCapR/). `read_redcap_tidy` returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
+The workhorse of REDCapTidieR is the `read_redcap_tidy()` function which uses [REDCapR](https://ouhscbbmc.github.io/REDCapR/) to issue API calls against a REDCap database and then cleans up what's returned to make it easy to use. `read_redcap_tidy` returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
 
 ## Hello metadata!
 
@@ -39,7 +39,7 @@ superheroes |>
 REDCapTidieR 0.2.0 provides the following new columns:
 
 -   `redcap_form_label`: The instrument's human-readable label
--   `redcap_metadata`: REDCap metadata associated with the instrument
+-   `redcap_metadata`: REDCap metadata associated with the instrument (derived from `REDCapR::redcap_metadata_read`)
 -   `redcap_events`: Events and arms associated with this instrument (for longitudinal projects only)
 -   `data_rows`, `data_cols`: Row and column counts of `redcap_data`
 -   `data_size`: Size of the `redcap_data` tibble in memory
@@ -61,7 +61,7 @@ In the RStudio Viewer, variable labels appear below each variable name. This mak
 
 ![](images/labelled_supertibble.png){fig-alt="Labelled supertibble"}
 
-While the variable labels in the supertibble are pre-defined, variable labels in the data tibbles (in `redcap_data`) are derived from the REDCap field labels:
+While the variable labels in the supertibble are pre-defined, variable labels in the data tibbles (in `redcap_data`) are derived from the REDCap field labels. This way, field labels seen in REDCap during data entry are repurposed as variable descriptions:
 
 ![](images/labelled_tibble.png){fig-alt="Labelled tibble"}
 
@@ -93,8 +93,8 @@ The implementation of the `forms` argument in `read_redcap_tidy` addresses an is
 
 Instruments that are used as surveys generate additional data fields:
 
--   `[instrument_name]_timestamp`
--   `redcap_survey_identifier`
+-   `[instrument_name]_timestamp`: the time at which the survey was competed
+-   `redcap_survey_identifier`: the participant identifier (this will be `NA` if the Participant Identifier feature in REDCap is disabled)
 
 By default, `read_redcap_tidy` will now return these fields if the instrument is used as a survey. 
 
@@ -121,13 +121,13 @@ Note the inclusion of the `redcap_survey_identifier` and `survey_timestamp` colu
 
 ## Performance improvements and enhancements
 
--   Increased execution time by >2.5X by optimizing internal functions `check_repeat_and_nonrepeat`, `distill_*_table_long`, and `multi_choice_to_labels`
+-   Improved execution time by >2.5X by optimizing internal functions `check_repeat_and_nonrepeat`, `distill_*_table_long`, and `multi_choice_to_labels`
 -   All warnings and error messages are now produced using `cli`
 -   Tests and vignettes now use `httptest` to mock and cache REDCap API calls
 -   Replaced deprecated `.data` pronoun in tidyselect expressions
 
 ## Bug fixes
 
--   Fixed a bug in which similarly named variables could be duplicated
+-   Fixed a bug in which similarly named variables could be duplicated under some circumstances
 -   Order of instruments in the supertibble is now the same as the order of instruments in REDCap
--   Fixed an issue in which `extract_*` functions returned `NULL` instead of the expected tibbles
+-   Fixed an issue in which `extract_*` functions under some circumstances returned `NULL` instead of the expected tibbles
