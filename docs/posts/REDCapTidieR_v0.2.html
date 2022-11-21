@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
+<meta name="description" content="REDCapTidieR v0.2.0 release announcement and change descriptions.">
 
 <title>Cell and Gene Therapy Informatics - REDCapTidieR 0.2.0 🦃</title>
 <style>
@@ -118,6 +119,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 </head>
 
@@ -185,8 +189,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">REDCapTidieR 0.2.0 🦃</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">REDCap</div>
+    <div class="quarto-category">REDCapTidieR</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    REDCapTidieR v0.2.0 release announcement and change descriptions.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -209,25 +223,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="hello-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="hello-metadata">Hello metadata!</h2>
 <p>A key change to REDCapTidieR in v0.2.0 is that the supertibble now includes a lot of additional instrument-level metadata.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_f951a00d4786005ce01df91310e4995d">
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_32f18536d99f55e96ad706bce160d165">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, token)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 2
-Columns: 9
-$ redcap_form_name  &lt;chr&gt; "heroes_information", "super_hero_powers"
-$ redcap_form_label &lt;chr&gt; "Heroes Information", "Super Hero Powers"
-$ redcap_data       &lt;list&gt; [&lt;tbl_df[734 x 12]&gt;], [&lt;tbl_df[5966 x 4]&gt;]
-$ redcap_metadata   &lt;list&gt; [&lt;tbl_df[11 x 16]&gt;], [&lt;tbl_df[2 x 16]&gt;]
-$ structure         &lt;chr&gt; "nonrepeating", "repeating"
-$ data_rows         &lt;int&gt; 734, 5966
-$ data_cols         &lt;int&gt; 12, 4
-$ data_size         &lt;lbstr_by&gt; 123.24 kB, 180.21 kB
-$ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes |&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,16]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.002316076"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0.000000000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 <p>REDCapTidieR 0.2.0 provides the following new columns:</p>
@@ -245,8 +257,8 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 <p>The <a href="https://larmarange.github.io/labelled/">labelled</a> package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi’s blog post <a href="https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/">The case for variable labels in R</a> to find out why you might want to use them.</p>
 <p>REDCapTidieR now provides <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/make_labelled.html"><code>make_labelled</code></a>, a high-level function that attaches labels to the supertibble and the tibbles it contains:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/unnamed-chunk-1_d22474d61cf232f053483ad9def01a9d">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_labelled <span class="ot">&lt;-</span> superheroes <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_labelled</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>superheroes_labelled <span class="ot">&lt;-</span> superheroes <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_labelled</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the RStudio Viewer, variable labels appear below each variable name. This makes it easy to inspect the contents of the supertibble:</p>
 <p><img src="images/labelled_supertibble.png" class="img-fluid" alt="Labelled supertibble"></p>
@@ -263,24 +275,21 @@ $ data_na_pct       &lt;dbl&gt; 0.2316076, 0.0000000</code></pre>
 <section id="retrieve-data-from-a-subset-of-instruments" class="level3">
 <h3 class="anchored" data-anchor-id="retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</h3>
 <p>You can now download specific <code>forms</code> from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_901eb7a829d1f116350adcabf0dff09f">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                       token, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1
-Columns: 9
-$ redcap_form_name  &lt;chr&gt; "super_hero_powers"
-$ redcap_form_label &lt;chr&gt; "Super Hero Powers"
-$ redcap_data       &lt;list&gt; [&lt;tbl_df[5966 x 4]&gt;]
-$ redcap_metadata   &lt;list&gt; [&lt;tbl_df[2 x 16]&gt;]
-$ structure         &lt;chr&gt; "repeating"
-$ data_rows         &lt;int&gt; 5966
-$ data_cols         &lt;int&gt; 4
-$ data_size         &lt;lbstr_by&gt; 180.21 kB
-$ data_na_pct       &lt;dbl&gt; 0</code></pre>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_15d1c4a3c4feb7526a6eecc821b0fed6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                       token, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes_powers |&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 </section>
@@ -293,13 +302,13 @@ $ data_na_pct       &lt;dbl&gt; 0</code></pre>
 </ul>
 <p>By default, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> will now return these fields if the instrument is used as a survey.</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/survey example_e128e21a23a87557f175b4d00541fb1a">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                    survey_token,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">forms =</span> <span class="st">"survey"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">export_survey_fields =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>survey_database<span class="sc">$</span>redcap_data[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                    survey_token,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">forms =</span> <span class="st">"survey"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">export_survey_fields =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>survey_database<span class="sc">$</span>redcap_data[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4
 Columns: 9

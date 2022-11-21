@@ -2,6 +2,11 @@
 title: REDCapTidieR 0.2.0 🦃
 image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
+description: "REDCapTidieR v0.2.0 release announcement and change descriptions."
+categories:
+  - REDCap
+  - REDCapTidieR
+  - R
 ---
 
 We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
@@ -19,9 +24,6 @@ library(dplyr)
 
 token <- Sys.getenv("SUPERHEROES_REDCAP_API")
 redcap_uri <- Sys.getenv("REDCAP_URI")
-# custom_display <- function(x){datatable(data = x, rownames = FALSE, options = list(
-#     dom = 't'
-#   ))}
 ```
 
 ```{r display supertibble}
@@ -32,8 +34,11 @@ library(REDCapTidieR)
 
 superheroes <- read_redcap_tidy(redcap_uri, token)
 
+# superheroes |>
+#   dplyr::glimpse()
+
 superheroes |>
-  dplyr::glimpse()
+  rmarkdown::paged_table()
 ```
 
 REDCapTidieR 0.2.0 provides the following new columns:
@@ -83,8 +88,10 @@ You can now download specific `forms` from your database instead of defaulting t
 superheroes_powers <- read_redcap_tidy(redcap_uri, 
                                        token, 
                                        forms = "super_hero_powers")
-superheroes_powers |> 
-  dplyr::glimpse()
+# superheroes_powers |> 
+#   dplyr::glimpse()
+superheroes_powers |>
+  rmarkdown::paged_table()
 ```
 
 ### Support for REDCap surveys
