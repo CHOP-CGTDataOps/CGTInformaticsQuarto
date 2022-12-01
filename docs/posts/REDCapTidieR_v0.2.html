@@ -9,7 +9,7 @@
 <meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
 <meta name="description" content="REDCapTidieR v0.2.0 release announcement and change descriptions.">
 
-<title>Cell and Gene Therapy Informatics - REDCapTidieR 0.2.0 🦃</title>
+<title>Cell and Gene Therapy Informatics - REDCapTidieR 0.2.0 ☃️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -171,13 +171,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link active" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
+  <li><a href="#naming-things-is-hard" id="toc-naming-things-is-hard" class="nav-link active" data-scroll-target="#naming-things-is-hard">Naming Things is Hard!</a>
+  <ul class="collapse">
+  <li><a href="#function-changes-and-handling" id="toc-function-changes-and-handling" class="nav-link" data-scroll-target="#function-changes-and-handling">Function Changes and Handling</a></li>
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
+  </ul></li>
+  <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
   <li><a href="#redcaptidier-labelled" id="toc-redcaptidier-labelled" class="nav-link" data-scroll-target="#redcaptidier-labelled">REDCapTidieR ❤️ labelled</a></li>
-  <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link" data-scroll-target="#new-read_redcap_tidy-arguments">New <span><code>read_redcap_tidy</code></span> arguments</a>
+  <li><a href="#new-read_redcap-arguments" id="toc-new-read_redcap-arguments" class="nav-link" data-scroll-target="#new-read_redcap-arguments">New <span><code>read_redcap</code></span> arguments</a>
   <ul class="collapse">
   <li><a href="#retrieve-data-from-a-subset-of-instruments" id="toc-retrieve-data-from-a-subset-of-instruments" class="nav-link" data-scroll-target="#retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</a></li>
   <li><a href="#support-for-redcap-surveys" id="toc-support-for-redcap-surveys" class="nav-link" data-scroll-target="#support-for-redcap-surveys">Support for REDCap surveys</a></li>
   </ul></li>
+  <li><a href="#new-and-expanded-documentation" id="toc-new-and-expanded-documentation" class="nav-link" data-scroll-target="#new-and-expanded-documentation">New and Expanded Documentation</a></li>
   <li><a href="#performance-improvements-and-enhancements" id="toc-performance-improvements-and-enhancements" class="nav-link" data-scroll-target="#performance-improvements-and-enhancements">Performance improvements and enhancements</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug fixes</a></li>
   </ul>
@@ -188,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">REDCapTidieR 0.2.0 🦃</h1>
+<h1 class="title">REDCapTidieR 0.2.0 ☃️</h1>
   <div class="quarto-categories">
     <div class="quarto-category">REDCap</div>
     <div class="quarto-category">REDCapTidieR</div>
@@ -219,14 +225,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment. You can install the current version from CRAN using <code>install.packages("REDCapTidieR")</code>.</p>
-<p>The workhorse of REDCapTidieR is the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy()</code></a> function which uses <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> to issue API calls against a REDCap database and then cleans up what’s returned to make it easy to use. <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> returns a special object, the <strong>supertibble</strong>, which contains data and metadata in neatly organized <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy</a> tibbles.</p>
+<section id="naming-things-is-hard" class="level2">
+<h2 class="anchored" data-anchor-id="naming-things-is-hard">Naming Things is Hard!</h2>
+<p>Before we get too deep into all of the exciting new features and expanded capabilities of the package, we need to address the rework of REDCapTidieR’s function names. As described in <a href="https://r-pkgs.org/workflow101.html#naming">R Packages</a>, naming packages and their components can prove to be the most difficult part of package creation! Trust us when we say we’ve spent a good length of time volleying every possible convention for both REDCapTidieR and each of its functions before landing on what we’ve chosen today.</p>
+<section id="function-changes-and-handling" class="level3">
+<h3 class="anchored" data-anchor-id="function-changes-and-handling">Function Changes and Handling</h3>
+<p>Below is quick list of the changes:</p>
+<ul>
+<li><code>read_redcap_tidy</code> is now <strong><code>read_redcap</code></strong></li>
+<li><code>bind_tables</code> is now <strong><code>bind_tibbles</code></strong></li>
+<li><code>extract_table</code> is now <strong><code>extract_tibble</code></strong></li>
+<li><code>extract_tables</code> is now <strong><code>extract_tibbles</code></strong></li>
+</ul>
+<p>Each of these will be handled with a soft deprecation, leading up to a removal of the original function names in a future version release. You can still use the original names, but you will receive an alert to switch to the new ones.</p>
+</section>
+<section id="rationale" class="level3">
+<h3 class="anchored" data-anchor-id="rationale">Rationale</h3>
+<p>When it came to chopping off the “tidy” portion of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a>, we thought about what the best course would be for <em>teachability</em>. When working with REDCap and R, you will find users who come to one solely having experience in the other. Some users will find R when looking for tools to analyze their REDCap database, others will be R aficionados thrown into REDCap analysis for the first time. Therefore, succinct names that describe directives are important. <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a> is evocative, and aligns well with tidyverse styled functions such as those in the <a href="https://readr.tidyverse.org/"><code>readr</code></a> package.</p>
+<p>As we worked on writing up the extensive documentation for REDCapTidieR’s <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">pkgdown site</a>, we wanted to really lean into “branding.” The major output of a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a> call is a special object containing data and metadata in neatly organized <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy</a> tibbles which we have opted to call the “<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble"><strong>supertibble</strong></a>.” Since this is essential to the DNA of the package, we chose to swap out the generic “table” names with “tibble” to align with the supertibble and serve as a more informative descriptor for what users can expect to get out of these functions.</p>
+</section>
+</section>
 <section id="hello-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="hello-metadata">Hello metadata!</h2>
 <p>A key change to REDCapTidieR in v0.2.0 is that the supertibble now includes a lot of additional instrument-level metadata.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_32f18536d99f55e96ad706bce160d165">
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_abe1f9348ec0385a86372c30f1ee6793">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, token)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, token)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes |&gt;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
@@ -237,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,16]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.002316076"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0.000000000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["formttbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,16]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.23%"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -265,9 +290,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>While the variable labels in the supertibble are pre-defined, variable labels in the data tibbles (in <code>redcap_data</code>) are derived from the REDCap field labels. This way, field labels seen in REDCap during data entry are repurposed as variable descriptions:</p>
 <p><img src="images/labelled_tibble.png" class="img-fluid" alt="Labelled tibble"></p>
 </section>
-<section id="new-read_redcap_tidy-arguments" class="level2">
-<h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> arguments</h2>
-<p>To enhance and expand the capabilities of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a>, we’ve introduced two new arguments to pass to the API:</p>
+<section id="new-read_redcap-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="new-read_redcap-arguments">New <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap</code></a> arguments</h2>
+<p>To enhance and expand the capabilities of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap</code></a>, we’ve introduced two new arguments to pass to the API:</p>
 <ul>
 <li><code>forms</code></li>
 <li><code>export_survey_fields</code></li>
@@ -275,10 +300,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="retrieve-data-from-a-subset-of-instruments" class="level3">
 <h3 class="anchored" data-anchor-id="retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</h3>
 <p>You can now download specific <code>forms</code> from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_15d1c4a3c4feb7526a6eecc821b0fed6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                       token, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_f50a50d47f16eadacecf2876094b19b8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                  token, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes_powers |&gt; </span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="sc">|&gt;</span></span>
@@ -287,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["formttbl"],"align":["right"]}],"data":[{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -325,6 +350,12 @@ $ form_status_complete     &lt;fct&gt; Complete, Incomplete, Incomplete, Incompl
 </div>
 <p>Note the inclusion of the <code>redcap_survey_identifier</code> and <code>survey_timestamp</code> columns.</p>
 </section>
+</section>
+<section id="new-and-expanded-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="new-and-expanded-documentation">New and Expanded Documentation</h2>
+<p>As mentioned earlier, we’ve been hard at work writing up extensive documentation to support new users in adopting REDCapTidieR. The <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/index.html">pkgdown site</a> includes updated pages, new vignettes, and a comprehensive glossary of terms and definitions.</p>
+<p>For help with labelling your supertibble, check out the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package">labelled</a> section of the Get Started page.</p>
+<p>Visit the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html">Glossary</a> for terms and definitions related to REDCap, REDCapTidieR, and everything in between!</p>
 </section>
 <section id="performance-improvements-and-enhancements" class="level2">
 <h2 class="anchored" data-anchor-id="performance-improvements-and-enhancements">Performance improvements and enhancements</h2>

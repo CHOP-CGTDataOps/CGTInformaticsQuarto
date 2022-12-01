@@ -1,5 +1,5 @@
 ---
-title: REDCapTidieR 0.2.0 🦃
+title: REDCapTidieR 0.2.0 ☃️
 image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
 description: "REDCapTidieR v0.2.0 release announcement and change descriptions."
@@ -11,7 +11,26 @@ categories:
 
 We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a [REDCap](https://www.project-redcap.org/) database into an R environment. You can install the current version from CRAN using `install.packages("REDCapTidieR")`.
 
-The workhorse of REDCapTidieR is the [`read_redcap_tidy()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) function which uses [REDCapR](https://ouhscbbmc.github.io/REDCapR/) to issue API calls against a REDCap database and then cleans up what's returned to make it easy to use. [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) returns a special object, the **supertibble**, which contains data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles.
+## Naming Things is Hard!
+
+Before we get too deep into all of the exciting new features and expanded capabilities of the package, we need to address the rework of REDCapTidieR's function names. As described in [R Packages](https://r-pkgs.org/workflow101.html#naming), naming packages and their components can prove to be the most difficult part of package creation! Trust us when we say we've spent a good length of time volleying every possible convention for both REDCapTidieR and each of its functions before landing on what we've chosen today.
+
+### Function Changes and Handling
+
+Below is quick list of the changes:
+
+- `read_redcap_tidy` is now **`read_redcap`**
+- `bind_tables` is now **`bind_tibbles`**
+- `extract_table` is now **`extract_tibble`**
+- `extract_tables` is now **`extract_tibbles`**
+
+Each of these will be handled with a soft deprecation, leading up to a removal of the original function names in a future version release. You can still use the original names, but you will receive an alert to switch to the new ones.
+
+### Rationale
+
+When it came to chopping off the "tidy" portion of [`read_redcap()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html), we thought about what the best course would be for _teachability_. When working with REDCap and R, you will find users who come to one solely having experience in the other. Some users will find R when looking for tools to analyze their REDCap database, others will be R aficionados thrown into REDCap analysis for the first time. Therefore, succinct names that describe directives are important. [`read_redcap()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html) is evocative, and aligns well with tidyverse styled functions such as those in the [`readr`](https://readr.tidyverse.org/) package.
+
+As we worked on writing up the extensive documentation for REDCapTidieR's [pkgdown site](https://chop-cgtinformatics.github.io/REDCapTidieR/), we wanted to really lean into "branding." The major output of a [`read_redcap()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html) call is a special object containing data and metadata in neatly organized [tidy](https://vita.had.co.nz/papers/tidy-data.pdf) tibbles which we have opted to call the "[**supertibble**](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble)." Since this is essential to the DNA of the package, we chose to swap out the generic "table" names with "tibble" to align with the supertibble and serve as a more informative descriptor for what users can expect to get out of these functions.
 
 ## Hello metadata!
 
@@ -32,7 +51,7 @@ redcap_uri <- Sys.getenv("REDCAP_URI")
 #| cache: true
 library(REDCapTidieR)
 
-superheroes <- read_redcap_tidy(redcap_uri, token)
+superheroes <- read_redcap(redcap_uri, token)
 
 # superheroes |>
 #   dplyr::glimpse()
@@ -70,9 +89,9 @@ While the variable labels in the supertibble are pre-defined, variable labels in
 
 ![](images/labelled_tibble.png){fig-alt="Labelled tibble"}
 
-## New [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html) arguments
+## New [`read_redcap`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html) arguments
 
-To enhance and expand the capabilities of [`read_redcap_tidy`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html), we've introduced two new arguments to pass to the API:
+To enhance and expand the capabilities of [`read_redcap`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html), we've introduced two new arguments to pass to the API:
 
 -   `forms`
 -   `export_survey_fields`
@@ -85,9 +104,9 @@ You can now download specific `forms` from your database instead of defaulting t
 #| include: true
 #| echo: true
 #| cache: true
-superheroes_powers <- read_redcap_tidy(redcap_uri, 
-                                       token, 
-                                       forms = "super_hero_powers")
+superheroes_powers <- read_redcap(redcap_uri, 
+                                  token, 
+                                  forms = "super_hero_powers")
 # superheroes_powers |> 
 #   dplyr::glimpse()
 superheroes_powers |>
@@ -123,6 +142,14 @@ survey_database$redcap_data[[1]] |>
 ```
 
 Note the inclusion of the `redcap_survey_identifier` and `survey_timestamp` columns.
+
+## New and Expanded Documentation
+
+As mentioned earlier, we've been hard at work writing up extensive documentation to support new users in adopting REDCapTidieR. The [pkgdown site](https://chop-cgtinformatics.github.io/REDCapTidieR/index.html) includes updated pages, new vignettes, and a comprehensive glossary of terms and definitions.
+
+For help with labelling your supertibble, check out the [labelled](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package) section of the Get Started page.
+
+Visit the [Glossary](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html) for terms and definitions related to REDCap, REDCapTidieR, and everything in between!
 
 ## Performance improvements and enhancements
 
