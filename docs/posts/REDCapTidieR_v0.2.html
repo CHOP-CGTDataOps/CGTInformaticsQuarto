@@ -9,7 +9,7 @@
 <meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
 <meta name="description" content="REDCapTidieR v0.2.0 release announcement and change descriptions.">
 
-<title>Cell and Gene Therapy Informatics - REDCapTidieR 0.2.0 🦃</title>
+<title>Cell and Gene Therapy Informatics - REDCapTidieR 0.2.0 ☃️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -171,9 +171,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link active" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
+  <li><a href="#new-names-for-functions" id="toc-new-names-for-functions" class="nav-link active" data-scroll-target="#new-names-for-functions">New names for functions</a>
+  <ul class="collapse">
+  <li><a href="#why-on-earth-would-you-do-that" id="toc-why-on-earth-would-you-do-that" class="nav-link" data-scroll-target="#why-on-earth-would-you-do-that">Why on earth would you do that?!</a></li>
+  <li><a href="#why-now" id="toc-why-now" class="nav-link" data-scroll-target="#why-now">Why now?</a></li>
+  </ul></li>
+  <li><a href="#improved-documentation" id="toc-improved-documentation" class="nav-link" data-scroll-target="#improved-documentation">Improved Documentation</a></li>
+  <li><a href="#hello-metadata" id="toc-hello-metadata" class="nav-link" data-scroll-target="#hello-metadata">Hello metadata!</a></li>
   <li><a href="#redcaptidier-labelled" id="toc-redcaptidier-labelled" class="nav-link" data-scroll-target="#redcaptidier-labelled">REDCapTidieR ❤️ labelled</a></li>
-  <li><a href="#new-read_redcap_tidy-arguments" id="toc-new-read_redcap_tidy-arguments" class="nav-link" data-scroll-target="#new-read_redcap_tidy-arguments">New <span><code>read_redcap_tidy</code></span> arguments</a>
+  <li><a href="#new-arguments-for-read_redcap" id="toc-new-arguments-for-read_redcap" class="nav-link" data-scroll-target="#new-arguments-for-read_redcap">New arguments for <code>read_redcap()</code></a>
   <ul class="collapse">
   <li><a href="#retrieve-data-from-a-subset-of-instruments" id="toc-retrieve-data-from-a-subset-of-instruments" class="nav-link" data-scroll-target="#retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</a></li>
   <li><a href="#support-for-redcap-surveys" id="toc-support-for-redcap-surveys" class="nav-link" data-scroll-target="#support-for-redcap-surveys">Support for REDCap surveys</a></li>
@@ -188,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">REDCapTidieR 0.2.0 🦃</h1>
+<h1 class="title">REDCapTidieR 0.2.0 ☃️</h1>
   <div class="quarto-categories">
     <div class="quarto-category">REDCap</div>
     <div class="quarto-category">REDCapTidieR</div>
@@ -218,76 +224,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.2.0 on CRAN! REDCapTidieR provides an user-friendly way to import data from a <a href="https://www.project-redcap.org/">REDCap</a> database into an R environment. You can install the current version from CRAN using <code>install.packages("REDCapTidieR")</code>.</p>
-<p>The workhorse of REDCapTidieR is the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy()</code></a> function which uses <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> to issue API calls against a REDCap database and then cleans up what’s returned to make it easy to use. <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> returns a special object, the <strong>supertibble</strong>, which contains data and metadata in neatly organized <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy</a> tibbles.</p>
+<p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.2.0 on CRAN! REDCapTidieR provides a user-friendly way to <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">import</a> data from a <a href="https://www.project-redcap.org/">REDCap</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">project</a> into the R environment. You can install the current version from CRAN using <code>install.packages("REDCapTidieR")</code>.</p>
+<section id="new-names-for-functions" class="level2">
+<h2 class="anchored" data-anchor-id="new-names-for-functions">New names for functions</h2>
+<p>We have decided to rename some of the exported functions of our package. Here is what changed:</p>
+<ul>
+<li><code>read_redcap_tidy()</code> is now <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><strong><code>read_redcap()</code></strong></a></li>
+<li><code>bind_tables()</code> is now <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/bind_tibbles.html"><strong><code>bind_tibbles()</code></strong></a></li>
+<li><code>extract_table()</code> is now <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/extract_tibble.html"><strong><code>extract_tibble()</code></strong></a></li>
+<li><code>extract_tables()</code> is now <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/extract_tibbles.html"><strong><code>extract_tibbles()</code></strong></a></li>
+</ul>
+<p>We have also cleaned up the API to make the function arguments more consistent.</p>
+<p>We are handling each of these name changes with deprecation functions of the <a href="https://lifecycle.r-lib.org/index.html">lifecycle package</a>. This means that you can still use the original function names, but you will receive an annoying alert to switch to the new ones each time you try to use them. At some point in the future we may remove the deprecated functions from the package.</p>
+<section id="why-on-earth-would-you-do-that" class="level3">
+<h3 class="anchored" data-anchor-id="why-on-earth-would-you-do-that">Why on earth would you do that?!</h3>
+<p>We want to design our API so it’s easy to learn and use.</p>
+<p>The main function of the package is <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a>, and its name explains exactly what it does: it reads or <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">imports</a> data from REDCap. The fact that the object that this function returns (i.e.&nbsp;the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>) is <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#tidy">tidy</a> is a technical detail.</p>
+<p>We replaced “table” with “<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#tibble">tibble</a>” in the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> extraction functions because “tibble” is a more precise term than “table.” Also, this way we are being more consistent in our use of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html">REDCapTidieR vocabulary</a> such as “<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>” and “<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a>”.</p>
+<p>We also thought about the names in terms of <strong>teachability</strong>. When you explain how to use the package to someone for the first time, how would you describe the action of each of the functions? For example, how do you read data from REDCap? With <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a>. How do you extract a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> from the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>? With <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/extract_tibble.html"><code>extract_tibble()</code></a>. Or if you’d rather bind the tibbles to your <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#environment">environment</a>, use <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/bind_tibbles.html"><code>bind_tibbles()</code></a>.</p>
+</section>
+<section id="why-now" class="level3">
+<h3 class="anchored" data-anchor-id="why-now">Why now?</h3>
+<p>REDCapTidieR is still very new and there doesn’t yet exist much code that depends on it (we hope this will change!). The cost of fixing things is low now compared to later on.</p>
+</section>
+</section>
+<section id="improved-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="improved-documentation">Improved Documentation</h2>
+<p>We’ve been hard at work writing up extensive <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/index.html">documentation</a> to support new users in adopting REDCapTidieR. The <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html">Getting Started vignette</a> walks new users through <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">importing</a> data from REDCap into a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>, exploring the contents of the supertibble in the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-viewer">RStudio Data Viewer</a>, extracting <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibbles</a>, and adding <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable-label">variable labels</a>.</p>
+<p>The <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html">Diving Deeper vignette</a> explains in detail how REDCapTidieR constructs <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibbles</a>.</p>
+<p>We also created a comprehensive <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html">Glossary of REDCap and REDCapTidieR terms</a> to which we will link frequently.</p>
+</section>
 <section id="hello-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="hello-metadata">Hello metadata!</h2>
-<p>A key change to REDCapTidieR in v0.2.0 is that the supertibble now includes a lot of additional instrument-level metadata.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_32f18536d99f55e96ad706bce160d165">
+<p>A key change to REDCapTidieR in v0.2.0 is that the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> now includes a lot of additional instrument-level metadata.</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/display supertibble_1b1ff4de05bc30640b3898e1d282c880">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, token)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>superheroes <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, token)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes |&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,16]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.002316076"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0.000000000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["formttbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,16]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.23%"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
 <p>REDCapTidieR 0.2.0 provides the following new columns:</p>
 <ul>
-<li><code>redcap_form_label</code>: The instrument’s human-readable label</li>
-<li><code>redcap_metadata</code>: REDCap metadata associated with the instrument (derived from <code>REDCapR::redcap_metadata_read</code>)</li>
-<li><code>redcap_events</code>: Events and arms associated with this instrument (for longitudinal projects only)</li>
-<li><code>data_rows</code>, <code>data_cols</code>: Row and column counts of <code>redcap_data</code></li>
+<li><code>redcap_form_label</code>: a human-readable label for the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#instrument">instrument</a></li>
+<li><code>redcap_metadata</code>: The <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#metadata-tibble">metadata tibble</a> with instrument-level metadata derived from <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code>REDCapR::redcap_metadata_read()</code></a></li>
+<li><code>redcap_events</code>: <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#event">Events</a> and <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#arm">arms</a> associated with this instrument (for <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#longitudinal-project">longitudinal projects</a> only)</li>
+<li><code>data_rows</code>, <code>data_cols</code>: <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#row">Row</a> and <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#column">column</a> counts of the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> (<code>redcap_data</code>)</li>
 <li><code>data_size</code>: Size of the <code>redcap_data</code> tibble in memory</li>
-<li><code>data_na_pct</code>: The percentage of missing data in the corresponding <code>redcap_data</code></li>
+<li><code>data_na_pct</code>: The percentage of missing data in the <code>redcap_data</code> tibble</li>
 </ul>
 </section>
 <section id="redcaptidier-labelled" class="level2">
 <h2 class="anchored" data-anchor-id="redcaptidier-labelled">REDCapTidieR ❤️ labelled</h2>
-<p>The <a href="https://larmarange.github.io/labelled/">labelled</a> package provides an elegant way to decorate the variables of a data frame with descriptive labels. Take a look at Shannon Pileggi’s blog post <a href="https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/">The case for variable labels in R</a> to find out why you might want to use them.</p>
-<p>REDCapTidieR now provides <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/make_labelled.html"><code>make_labelled</code></a>, a high-level function that attaches labels to the supertibble and the tibbles it contains:</p>
+<p>The <a href="https://larmarange.github.io/labelled/">labelled</a> R package provides functions to attach a human-readable description (a label) to a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable">variable</a> (a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable-label">variable label</a>). Variable labels are awesome and we think you will find them useful! Take a look at Shannon Pileggi’s blog post <a href="https://www.pipinghotdata.com/posts/2022-09-13-the-case-for-variable-labels-in-r/">The case for variable labels in R</a> to find out more.</p>
+<p>REDCapTidieR now provides <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/make_labelled.html"><code>make_labelled()</code></a>, a function that attaches <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable-label">variable labels</a> to the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> and the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#tibble">tibbles</a> it contains:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/unnamed-chunk-1_d22474d61cf232f053483ad9def01a9d">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>superheroes_labelled <span class="ot">&lt;-</span> superheroes <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_labelled</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the RStudio Viewer, variable labels appear below each variable name. This makes it easy to inspect the contents of the supertibble:</p>
+<p>In the RStudio <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-viewer">Data Viewer</a>, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable-label">variable labels</a> appear below each <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#column">column</a> name. This makes it easy to inspect the contents of the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>:</p>
 <p><img src="images/labelled_supertibble.png" class="img-fluid" alt="Labelled supertibble"></p>
-<p>While the variable labels in the supertibble are pre-defined, variable labels in the data tibbles (in <code>redcap_data</code>) are derived from the REDCap field labels. This way, field labels seen in REDCap during data entry are repurposed as variable descriptions:</p>
+<p>While the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#variable-label">variable labels</a> in the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> are static and pre-defined, variable labels in the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibbles</a> (<code>redcap_data</code>) are derived from the REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#field-label">field labels</a>. A field label is a piece of text that prompts the REDCap user during data entry. We repurpose field labels to provide a description for the variable:</p>
 <p><img src="images/labelled_tibble.png" class="img-fluid" alt="Labelled tibble"></p>
 </section>
-<section id="new-read_redcap_tidy-arguments" class="level2">
-<h2 class="anchored" data-anchor-id="new-read_redcap_tidy-arguments">New <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> arguments</h2>
-<p>To enhance and expand the capabilities of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a>, we’ve introduced two new arguments to pass to the API:</p>
+<section id="new-arguments-for-read_redcap" class="level2">
+<h2 class="anchored" data-anchor-id="new-arguments-for-read_redcap">New arguments for <code>read_redcap()</code></h2>
+<p>We have introduced two new arguments that can be passed to the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a> function:</p>
 <ul>
 <li><code>forms</code></li>
 <li><code>export_survey_fields</code></li>
 </ul>
 <section id="retrieve-data-from-a-subset-of-instruments" class="level3">
 <h3 class="anchored" data-anchor-id="retrieve-data-from-a-subset-of-instruments">Retrieve data from a subset of instruments</h3>
-<p>You can now download specific <code>forms</code> from your database instead of defaulting to downloading the entire dataset. This can be useful for very large databases.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_15d1c4a3c4feb7526a6eecc821b0fed6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                       token, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">forms =</span> <span class="st">"super_hero_powers"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># superheroes_powers |&gt; </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::glimpse()</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can now <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">import</a> data from specific <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#instrument">instruments</a> from your <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">project</a> instead of importing the entire dataset. This can be useful for very large projects.</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/forms example_99e2016a112b7bad3ef194fde36ef6bb">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Only import the super_hero_powers instrument</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  redcap_uri,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  token,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">forms =</span> <span class="st">"super_hero_powers"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>superheroes_powers <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["formttbl"],"align":["right"]}],"data":[{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,16]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -295,20 +328,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="support-for-redcap-surveys" class="level3">
 <h3 class="anchored" data-anchor-id="support-for-redcap-surveys">Support for REDCap surveys</h3>
-<p>Instruments that are used as surveys generate additional data fields:</p>
+<p>REDCap now supports <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#survey">surveys</a>, which are a special type of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#instrument">instrument</a> that can be filled out by someone who isn’t a registered user of the REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">project</a>. Instruments that are used as surveys generate additional <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">data columns</a>:</p>
 <ul>
-<li><code>[instrument_name]_timestamp</code>: the time at which the survey was competed</li>
-<li><code>redcap_survey_identifier</code>: the participant identifier (this will be <code>NA</code> if the Participant Identifier feature in REDCap is disabled)</li>
+<li><code>redcap_survey_timestamp</code>: the time at which the survey was completed</li>
+<li><code>redcap_survey_identifier</code>: the participant identifier (this will be <code>NA</code> if the Participant Identifier feature in REDCap is disabled such as for an anonymous survey)</li>
 </ul>
-<p>By default, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html"><code>read_redcap_tidy</code></a> will now return these fields if the instrument is used as a survey.</p>
-<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/survey example_e128e21a23a87557f175b4d00541fb1a">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap_tidy</span>(redcap_uri,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                    survey_token,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">forms =</span> <span class="st">"survey"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">export_survey_fields =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>survey_database<span class="sc">$</span>redcap_data[[<span class="dv">1</span>]] <span class="sc">|&gt;</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By default, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap.html"><code>read_redcap()</code></a> will now return these <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#column">columns</a> if the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#instrument">instrument</a> is set up as a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#survey">survey</a>. Note the <code>redcap_survey_identifier</code> and <code>redcap_survey_timestamp</code> columns below:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.2_cache/html/survey example_d8b6f9a7bc6a24d666fe5d34e3008e3b">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>survey_database <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, survey_token)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>survey_database <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_tibble</span>(<span class="st">"survey"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 4
 Columns: 9
@@ -318,21 +349,21 @@ $ survey_radio             &lt;fct&gt; Choice 1, Choice 2, NA, NA
 $ survey_checkbox___one    &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE
 $ survey_checkbox___two    &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE
 $ survey_checkbox___three  &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE
-$ survey_timestamp         &lt;dttm&gt; 2022-11-09 10:33:35, NA, NA, NA
 $ redcap_survey_identifier &lt;lgl&gt; NA, NA, NA, NA
+$ redcap_survey_timestamp  &lt;dttm&gt; 2022-11-09 10:33:35, NA, NA, NA
 $ form_status_complete     &lt;fct&gt; Complete, Incomplete, Incomplete, Incomplete</code></pre>
 </div>
 </div>
-<p>Note the inclusion of the <code>redcap_survey_identifier</code> and <code>survey_timestamp</code> columns.</p>
 </section>
 </section>
 <section id="performance-improvements-and-enhancements" class="level2">
 <h2 class="anchored" data-anchor-id="performance-improvements-and-enhancements">Performance improvements and enhancements</h2>
 <ul>
-<li>Improved execution time by &gt;2.5X by optimizing internal functions <code>check_repeat_and_nonrepeat</code>, <code>distill_*_table_long</code>, and <code>multi_choice_to_labels</code></li>
-<li>All warnings and error messages are now produced using <code>cli</code></li>
-<li>Tests and vignettes now use <code>httptest</code> to mock and cache REDCap API calls</li>
-<li>Replaced deprecated <code>.data</code> pronoun in tidyselect expressions</li>
+<li><strong>Improved execution time by &gt;2.5X</strong> by optimizing internal functions</li>
+<li>Added many helpful warnings and error messages, using <a href="https://cli.r-lib.org/">cli</a> for pretty printing</li>
+<li>Tests and vignettes now use <a href="https://enpiar.com/r/httptest/">httptest</a> to mock and cache REDCap API calls</li>
+<li>Implemented GitHub Actions lint check</li>
+<li>Replaced deprecated <code>.data</code> pronoun in <a href="https://tidyselect.r-lib.org/reference/language.html">tidyselect</a> expressions</li>
 </ul>
 </section>
 <section id="bug-fixes" class="level2">
