@@ -42,7 +42,7 @@ From the API, [repeating](https://chop-cgtinformatics.github.io/REDCapTidieR/art
 
 For REDCapTidieR 0.3.0, we decided it is better to be explicit about what our [columns](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column) mean. For this reason, `redcap_repeat_instance` has been split into `redcap_form_instance` and `redcap_event_instance` for applicable [databases](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#database). This is a **breaking change** in the output of the package.
 
-For the above sample database, the typical `REDCapTidieR::read_readcap()` output stays the same:
+For the above sample database, the high-level `REDCapTidieR::read_readcap()` [supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble) [structure](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#structure) stays the same:
 
 ::: {.column-body-outset}
 ![](images/repeat_event_db.png){fig-align="center" width="1000"}
@@ -57,6 +57,8 @@ And the new `redcap_event_instance` variable associated with the `nr_instrument`
 ![](images/redcap_event_instance.png){fig-align="center" width="800"}
 
 ### What this means for you
+
+For developers/maintainers of longitudinal REDCap's with no repeating events [repeating](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating) [events](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#event), the only change to keep track of is the switch from `redca_repeat_instance` to `redcap_form_instance`.
 
 The additional capabilities provided by [repeating](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating) [events](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#event) support brought us back to the drawing board for how we wanted to best tackle REDCap [data tibbles](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble). A cornerstone decision for REDCapTidieR's design is to remove any sparsity from a REDCap output, as given by the default [block matrix](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix). By introducing `redcap_event_instance`, we are actively choosing to reintroduce the potential for `NA`/missing data. This rationale is based on the need to have [data tibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble) [columns](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column) preserved with singular meaning. Any one [column](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column) should not be dependent on another for identification of [structure](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#structure). The [block matrix](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix) and associated use of `redcap_repeat_instrument` and `redcap_repeat_instance` is not in line with the reduction in ambiguity that REDCapTidieR seeks to provide developers.
 
