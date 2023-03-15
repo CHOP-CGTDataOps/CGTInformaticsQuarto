@@ -22,9 +22,31 @@ install.packages("REDCapTidieR")
 
 REDCapTidieR introduces support for REDCap "repeating events," enhancing its versatility in handling diverse data collection scenarios. A repeating event is a feature in REDCap that is often utilized in clinical trials for unscheduled study visits. It allows for the collection of the same data zero, one, or multiple times within a longitudinal project alongside regular scheduled study visit events. This feature enables researchers to efficiently gather data from the same set of instruments during various unscheduled time points or instances, while maintaining an organized data structure. With this update, users of longitudinal databases can now take full advantage of these features, simplifying data import and analysis in R.
 
-For example, consider the `physical_exam` table which contains data from both regular scheduled and unscheduled visits. (...)
+For example, consider the `physical_exam` table which contains data from both regular scheduled and unscheduled visits. These unscheduled visits occur under a single REDCap repeating event. Notice how `subject_id` 001-123-001 has data for both the "screening_enrollm" and "unscheduled" `redcap_event`s, but only has `redcap_event_instance` values for the "unscheduled" one.
 
-*TODO: Please add a code example showing a table with scheduled and unscheduled visits.**
+```{r}
+#| include: false
+#| echo: false
+library(dplyr)
+
+token <- Sys.getenv("REDCAPTIDIER_DEEP_DIVE_VIGNETTE_API")
+redcap_uri <- Sys.getenv("REDCAP_URI")
+```
+
+```{r}
+#| include: true
+#| echo: true
+#| cache: true
+#| warning: false
+library(REDCapTidieR)
+
+read_redcap(redcap_uri, token) |> 
+  bind_tibbles()
+
+physical_exam |> 
+  filter(redcap_event == "screening__enrollm" | redcap_event == "unscheduled") |> 
+  rmarkdown::paged_table()
+```
 
 To support repeating events fully we updated the way REDCapTidieR creates identifier columns for a data tibble (see table below). A breaking change in version 0.3.0 is that we removed the `redcap_repeat_instance` and replaced it with `redcap_form_instance` for repeated instruments and `redcap_event_instance` for repeated events. If you explicitly refer to `redcap_repeat_instance` anywhere in your code you will update this to `redcap_form_instance`. Please note that REDCap does not allow having repeating instruments inside a repeating event.
 

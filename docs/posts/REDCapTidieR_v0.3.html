@@ -8,7 +8,7 @@
 
 <meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
 <meta name="dcterms.date" content="2023-02-28">
-<meta name="description" content="REDCapTidieR v0.3.0 release announcement and change descriptions.">
+<meta name="description" content="REDCapTidieR v0.3.0 Release Announcement">
 
 <title>Cell and Gene Therapy Informatics - REDCapTidieR 0.3.0</title>
 <style>
@@ -125,6 +125,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 </head>
 
@@ -181,13 +184,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#repeating-events-support" id="toc-repeating-events-support" class="nav-link active" data-scroll-target="#repeating-events-support">Repeating events support 🎉</a>
-  <ul class="collapse">
-  <li><a href="#what-this-means-in-redcap" id="toc-what-this-means-in-redcap" class="nav-link" data-scroll-target="#what-this-means-in-redcap">What this means in REDCap</a></li>
-  <li><a href="#what-this-means-in-redcaptidier" id="toc-what-this-means-in-redcaptidier" class="nav-link" data-scroll-target="#what-this-means-in-redcaptidier">What this means in REDCapTidieR</a></li>
-  <li><a href="#what-this-means-for-you" id="toc-what-this-means-for-you" class="nav-link" data-scroll-target="#what-this-means-for-you">What this means for you</a></li>
-  </ul></li>
-  <li><a href="#performance-improvements-and-enhancements" id="toc-performance-improvements-and-enhancements" class="nav-link" data-scroll-target="#performance-improvements-and-enhancements">Performance improvements and enhancements</a></li>
+  <li><a href="#major-update-repeating-events-support" id="toc-major-update-repeating-events-support" class="nav-link active" data-scroll-target="#major-update-repeating-events-support">Major Update: Repeating Events Support! 🎉</a></li>
+  <li><a href="#performance-improvements-and-enhancements" id="toc-performance-improvements-and-enhancements" class="nav-link" data-scroll-target="#performance-improvements-and-enhancements">Performance Improvements and Enhancements</a></li>
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug Fixes</a></li>
   </ul>
 </nav>
@@ -207,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div>
   <div class="description">
-    REDCapTidieR v0.3.0 release announcement and change descriptions.
+    REDCapTidieR v0.3.0 Release Announcement
   </div>
 </div>
 
@@ -239,59 +237,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"REDCapTidieR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="repeating-events-support" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="repeating-events-support">Repeating events support 🎉</h2>
-<section id="what-this-means-in-redcap" class="level3">
-<h3 class="anchored" data-anchor-id="what-this-means-in-redcap">What this means in REDCap</h3>
-<p>One of the biggest updates to REDCapTidieR is support for REDCap “repeating events.” For the uninitiated, REDCap allows for two types of repeating elements: <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#instrument"><strong>instruments</strong></a> and <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#event"><strong>events</strong></a>. Note that each of these is only available to <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#longitudinal-project">longitudinal</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#database">databases</a>. When designing a REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#database">database</a>, developers have the option to specify whether an event repeats all instruments together or repeats instruments independently of each other. From REDCap, this looks like:</p>
-<p><img src="images/repeating_events_instruments.png" class="img-fluid" alt="REDCap Repeating Instruments Events"></p>
-<p>And for a given record that has both <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating <strong>instruments</strong></a> and <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating <strong>events</strong></a>, this takes the visual form:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/redcap_repeat_events_ui.png" class="img-fluid figure-img" alt="REDCap Repeating Events UI" width="447"></p>
-</figure>
-</div>
-<p>Where the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating <em>instrument</em></a> is shown in the <span style="color: red;">red box</span> and the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating <em>event</em></a> is shown in the <span style="color: green;">green box</span>.</p>
-<p>From the API, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating events</a> aren’t captured much differently from <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating instruments</a>. In fact, no new column names are added to the data export. The same default columns of <code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> are used to indicate a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating instrument</a> when <em>both</em> are filled with data. It is the <em>lack</em> of data in <code>redcap_repeat_instrument</code> while data remains in <code>redcap_repeat_instance</code> which indicates a <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating event</a>. In the image below, a sample REDCap export is shown where the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating instrument</a> data is shown in the <span style="color: red;">red box</span> and the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating event</a> data is shown in the <span style="color: green;">green box</span>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/repeating_events_instrument_export.png" class="img-fluid figure-img" alt="REDCap Repeating Event Export" width="518"></p>
-</figure>
-</div>
-<blockquote class="blockquote">
-<p>It is important to note that <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating instruments</a> <strong>cannot</strong> be included in <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating events</a>, and REDCapTidieR will throw an error if this is forced and detected!</p>
-</blockquote>
-</section>
-<section id="what-this-means-in-redcaptidier" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="what-this-means-in-redcaptidier">What this means in REDCapTidieR</h3>
-<p>For REDCapTidieR 0.3.0, we decided it is better to be explicit about what our <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">columns</a> mean. For this reason, <code>redcap_repeat_instance</code> has been split into <code>redcap_form_instance</code> and <code>redcap_event_instance</code> for applicable <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#database">databases</a>. This is a <strong>breaking change</strong> in the output of the package.</p>
-<p>For the above sample database, the high-level <code>REDCapTidieR::read_readcap()</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#structure">structure</a> stays the same:</p>
-<div class="column-body-outset">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/repeat_event_db.png" class="img-fluid figure-img" width="1000"></p>
-</figure>
+<section id="major-update-repeating-events-support" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="major-update-repeating-events-support">Major Update: Repeating Events Support! 🎉</h2>
+<p>REDCapTidieR introduces support for REDCap “repeating events,” enhancing its versatility in handling diverse data collection scenarios. A repeating event is a feature in REDCap that is often utilized in clinical trials for unscheduled study visits. It allows for the collection of the same data zero, one, or multiple times within a longitudinal project alongside regular scheduled study visit events. This feature enables researchers to efficiently gather data from the same set of instruments during various unscheduled time points or instances, while maintaining an organized data structure. With this update, users of longitudinal databases can now take full advantage of these features, simplifying data import and analysis in R.</p>
+<p>For example, consider the <code>physical_exam</code> table which contains data from both regular scheduled and unscheduled visits. These unscheduled visits occur under a single REDCap repeating event. Notice how <code>subject_id</code> 001-123-001 has data for both the “screening_enrollm” and “unscheduled” <code>redcap_event</code>s, but only has <code>redcap_event_instance</code> values for the “unscheduled” one.</p>
+<div class="cell" data-hash="REDCapTidieR_v0.3_cache/html/unnamed-chunk-3_6ccae6a5739a081349944cca6e497d3b">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_redcap</span>(redcap_uri, token) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_tibbles</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>physical_exam <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(redcap_event <span class="sc">==</span> <span class="st">"screening__enrollm"</span> <span class="sc">|</span> redcap_event <span class="sc">==</span> <span class="st">"unscheduled"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["subject_id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_event"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_event_instance"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["physical_capture"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["physical_capture_infusion_sql"],"name":[5],"type":["lgl"],"align":["right"]},{"label":["physical_capture_visit"],"name":[6],"type":["fct"],"align":["left"]},{"label":["physical_performed"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["physical_performed_date"],"name":[8],"type":["date"],"align":["right"]},{"label":["physical_performance_scale"],"name":[9],"type":["fct"],"align":["left"]},{"label":["physical_performance_score"],"name":[10],"type":["fct"],"align":["left"]},{"label":["physical_findings"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["physical_findings_specify"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["form_status_complete"],"name":[13],"type":["fct"],"align":["left"]}],"data":[{"1":"001-123-001","2":"screening__enrollm","3":"NA","4":"FALSE","5":"NA","6":"NA","7":"TRUE","8":"2022-11-03","9":"Karnofsky Scale","10":"30","11":"FALSE","12":"NA","13":"Complete"},{"1":"001-123-001","2":"unscheduled","3":"1","4":"FALSE","5":"NA","6":"NA","7":"TRUE","8":"2022-12-01","9":"Karnofsky Scale","10":"50","11":"FALSE","12":"NA","13":"Complete"},{"1":"001-123-001","2":"unscheduled","3":"2","4":"FALSE","5":"NA","6":"NA","7":"TRUE","8":"2022-12-15","9":"Karnofsky Scale","10":"80","11":"FALSE","12":"NA","13":"Complete"},{"1":"001-123-002","2":"screening__enrollm","3":"NA","4":"FALSE","5":"NA","6":"NA","7":"TRUE","8":"2022-11-03","9":"Karnofsky Scale","10":"90","11":"FALSE","12":"NA","13":"Complete"},{"1":"001-123-003","2":"screening__enrollm","3":"NA","4":"FALSE","5":"NA","6":"NA","7":"TRUE","8":"2022-11-09","9":"Lansky Scale","10":"100","11":"FALSE","12":"NA","13":"Complete"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
 </div>
-<p>However, for the repeating instrument associated with the <code>r_instrument</code> form name, the new <code>redcap_form_instance</code> variable can be seen in the <span style="color: red;">red box</span>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/redcap_form_instance.png" class="img-fluid figure-img" width="800"></p>
-</figure>
 </div>
-<p>And the new <code>redcap_event_instance</code> variable associated with the <code>nr_instrument</code> form name can be seen in the <span style="color: green;">green box</span>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/redcap_event_instance.png" class="img-fluid figure-img" width="800"></p>
-</figure>
-</div>
-</section>
-<section id="what-this-means-for-you" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="what-this-means-for-you">What this means for you</h3>
-<p>For developers/maintainers of longitudinal REDCap’s with no repeating events <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating events</a>, the only change to keep track of is the switch from <code>redcap_repeat_instance</code> to <code>redcap_form_instance</code>.</p>
-<p>The additional capabilities provided by <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating events</a> support brought us back to the drawing board for how we wanted to best tackle REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibbles</a>. A cornerstone decision for REDCapTidieR’s design is to remove any sparsity from a REDCap output, as given by the default <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix">block matrix</a>. By introducing <code>redcap_event_instance</code>, we are actively choosing to reintroduce the potential for <code>NA</code>/missing data. This rationale is based on the need to have <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">columns</a> preserved with singular meaning. Any one <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">column</a> should not be dependent on another for identification of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#structure">structure</a>. The <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix">block matrix</a> and associated use of <code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> is not in line with the reduction in ambiguity that REDCapTidieR seeks to provide developers.</p>
-<p>This means that for longitudinal REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#database">databases</a>, any use of <code>redcap_repeat_instance</code> needs to be updated to use the appropriate <code>redcap_form_instance</code>/<code>redcap_event_instance</code> variables.</p>
-<p>The associated <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#granularity">granularity</a> for the updated <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#identifier-column">identifier columns</a> is illustrated in greater detail in the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html#longitudinal-redcap-projects">REDCapTidieR Diving Deeper vignette</a> as well as depicted here:</p>
+<p>To support repeating events fully we updated the way REDCapTidieR creates identifier columns for a data tibble (see table below). A breaking change in version 0.3.0 is that we removed the <code>redcap_repeat_instance</code> and replaced it with <code>redcap_form_instance</code> for repeated instruments and <code>redcap_event_instance</code> for repeated events. If you explicitly refer to <code>redcap_repeat_instance</code> anywhere in your code you will update this to <code>redcap_form_instance</code>. Please note that REDCap does not allow having repeating instruments inside a repeating event.</p>
 <div class="column-body-outset">
 <table class="table">
 <colgroup>
@@ -357,28 +325,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </section>
-</section>
 <section id="performance-improvements-and-enhancements" class="level2">
-<h2 class="anchored" data-anchor-id="performance-improvements-and-enhancements">Performance improvements and enhancements</h2>
+<h2 class="anchored" data-anchor-id="performance-improvements-and-enhancements">Performance Improvements and Enhancements</h2>
 <ul>
-<li>Improved error message suite:
+<li>Better error messages
 <ul>
-<li>Helpful error message provided for various conditions related to REDCap API calls</li>
-<li>Helpful error messages added for checks across all exported functions</li>
-<li>Unexpected error messages provided with direction to submitting bug reports</li>
-<li>Improved error messages for label parsing</li>
+<li>Added informative error messages for various REDCap API call-related conditions</li>
+<li>Included helpful error messages across all exported functions</li>
+<li>Provided guidance for submitting bug reports when encountering unexpected errors</li>
 </ul></li>
-<li>The default <code>select_choices_and_calculations</code> exported by the REDCap API for <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#metadata-tibble">metadata</a> purposes has been reintegrated. It was dropped in v0.2.0.</li>
+<li>Added <code>select_choices_and_calculations</code> column to the metadata tibble</li>
 </ul>
 </section>
 <section id="bug-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h2>
 <ul>
-<li>Fixed a bug where the <code>suppress_redcapr_messages</code> argument for <code>read_redcap</code> was not working appropriately</li>
-<li>Fixed a bug where REDCap checkbox labels without white space would be incorrectly parsed</li>
-<li>Added a warning when REDCapTidieR detects a multiple choice field that has duplicated labels</li>
-<li>Fixed a bug where empty rows would appear in data tibbles in longitudinal REDCap exports for events containing a mix of empty and filled forms</li>
-<li>Fixed a bug where the <code>forms</code> specification in <code>read_redcap()</code> may lead to incorrect removal of data for databases with repeating events</li>
+<li>Resolved an issue where the <code>suppress_redcapr_messages</code> argument of <code>read_redcap()</code> did not work</li>
+<li>Fixed incorrect parsing of REDCap choices for categorical variables without white space after comma</li>
+<li>Implemented a warning when duplicated choice labels are detected for categorical variables</li>
+<li>Addressed a bug causing empty rows in data tibbles for longitudinal REDCap projects</li>
+<li>Fixed an issue where the <code>forms</code> specification in <code>read_redcap()</code> did not work correctly</li>
 </ul>
 
 
