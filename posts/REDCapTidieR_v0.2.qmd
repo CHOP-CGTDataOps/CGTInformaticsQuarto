@@ -3,6 +3,7 @@ title: REDCapTidieR 0.2.0 ☃️
 image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
 description: "REDCapTidieR v0.2.0 release announcement and change descriptions."
+date: "2022-12-06"
 categories:
   - REDCap
   - REDCapTidieR

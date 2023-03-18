@@ -56,6 +56,34 @@
     "text": "Bug fixes\n\nFixed a bug in which similarly named variables could be duplicated under some circumstances\nOrder of instruments in the supertibble is now the same as the order of instruments in REDCap\nFixed an issue in which extract_* functions under some circumstances returned NULL instead of the expected tibbles"
   },
   {
+    "objectID": "posts/REDCapTidieR_v0.3.html",
+    "href": "posts/REDCapTidieR_v0.3.html",
+    "title": "REDCapTidieR 0.3.0",
+    "section": "",
+    "text": "We’re thrilled to announce the release of REDCapTidieR v0.3.0 on CRAN! REDCapTidieR provides a user-friendly way to import data from a REDCap project into the R environment.\nYou can install the current version from CRAN with:"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.3.html#major-update-repeating-events-support",
+    "href": "posts/REDCapTidieR_v0.3.html#major-update-repeating-events-support",
+    "title": "REDCapTidieR 0.3.0",
+    "section": "Major Update: Repeating Events Support! 🎉",
+    "text": "Major Update: Repeating Events Support! 🎉\nREDCapTidieR introduces support for REDCap “repeating events,” enhancing its versatility in handling diverse data collection scenarios. A repeating event is a feature in REDCap that is often utilized in clinical trials for unscheduled study visits. It allows for the collection of the same data zero, one, or multiple times within a longitudinal project alongside regular scheduled study visit events. This feature enables researchers to efficiently gather data from the same set of instruments during various unscheduled time points or instances, while maintaining an organized data structure. With this update, users of longitudinal databases can now take full advantage of these features, simplifying data import and analysis in R.\nFor example, consider the physical_exam table which contains data from both regular scheduled and unscheduled visits. These unscheduled visits occur under a single REDCap repeating event. Notice how subject_id 001-123-001 has data for both the “screening_enrollm” and “unscheduled” redcap_events, but only has redcap_event_instance values for the “unscheduled” one.\n\nlibrary(REDCapTidieR)\n\nread_redcap(redcap_uri, token) |> \n  bind_tibbles()\n\nphysical_exam |> \n  filter(redcap_event == \"screening__enrollm\" | redcap_event == \"unscheduled\") |> \n  rmarkdown::paged_table()\n\n\n\n  \n\n\n\nTo support repeating events fully we updated the way REDCapTidieR creates identifier columns for a data tibble (see table below). A breaking change in version 0.3.0 is that we removed the redcap_repeat_instance and replaced it with redcap_form_instance for repeated instruments and redcap_event_instance for repeated events. If you explicitly refer to redcap_repeat_instance anywhere in your code you will update this to redcap_form_instance. Please note that REDCap does not allow having repeating instruments inside a repeating event.\n\n\n\n\n\n\n\n\n\n\n\nInstrument Structure\nEvent Structure\nClassic\nLongitudinal, one arm\nLongitudinal, multi-arm\n\n\n\n\nNonrepeating\nNonrepeating\nrecord_id\nrecord_id +\nredcap_event\nrecord_id +\nredcap_event +\nredcap_arm\n\n\nRepeating\nNonrepeating\nrecord_id +\nredcap_form_instance\nrecord_id +\nredcap_form_instance +\nredcap_event\nrecord_id +\nredcap_form_instance +\nredcap_event +\nredcap_arm\n\n\nNonrepeating\nRepeating\nN/A\nrecord_id +\nredcap_event_instance +\nredcap_event\nrecord_id +\nredcap_event_instance +\nredcap_event +\nredcap_arm\n\n\nRepeating\nRepeating\nNot Supported\nNot Supported\nNot Supported"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.3.html#performance-improvements-and-enhancements",
+    "href": "posts/REDCapTidieR_v0.3.html#performance-improvements-and-enhancements",
+    "title": "REDCapTidieR 0.3.0",
+    "section": "Performance Improvements and Enhancements",
+    "text": "Performance Improvements and Enhancements\n\nBetter error messages\n\nAdded informative error messages for various REDCap API call-related conditions\nIncluded helpful error messages across all exported functions\nProvided guidance for submitting bug reports when encountering unexpected errors\n\nAdded select_choices_and_calculations column to the metadata tibble"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.3.html#bug-fixes",
+    "href": "posts/REDCapTidieR_v0.3.html#bug-fixes",
+    "title": "REDCapTidieR 0.3.0",
+    "section": "Bug Fixes",
+    "text": "Bug Fixes\n\nResolved an issue where the suppress_redcapr_messages argument of read_redcap() did not work\nFixed incorrect parsing of REDCap choices for categorical variables without white space after comma\nImplemented a warning when duplicated choice labels are detected for categorical variables\nAddressed a bug causing empty rows in data tibbles for longitudinal REDCap projects\nFixed an issue where the forms specification in read_redcap() did not work correctly"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to CGT Informatics!",
@@ -95,6 +123,6 @@
     "href": "posts.html",
     "title": "Posts",
     "section": "",
-    "text": "REDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
+    "text": "REDCapTidieR 0.3.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.3.0 Release Announcement\n\n\n\n\n\n\nFeb 28, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nDec 6, 2022\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }
 ]
