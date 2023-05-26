@@ -12,7 +12,7 @@ categories:
 
 We're thrilled to announce the release of [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) v0.4.0 on CRAN! REDCapTidieR provides a user-friendly way to [import](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import) data from a [REDCap](https://www.project-redcap.org/) [project](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project) into the R environment.
 
-This blog post will introduce you to two brand new features for exploratory data analysis and data exportation.
+This blog post will introduce you to three brand new features we're excited to share.
 
 You can install the current version from CRAN with:
 
@@ -112,3 +112,31 @@ superheroes %>%
 -   Columns derived from **truefalse** fields are left as is (`TRUE`/`FALSE`)
 
 Setting `recode_logical` to `FALSE` will preserve all logical fields as (`TRUE`/`FALSE`).
+
+## Data Access Group Support 🏢
+
+In REDCap [projects](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project), [Data Access Groups](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-access-group) (DAGs) are used to assign user privileges and control record-level access. DAGs are particularly useful in multi-center studies where data for one participant needs to be kept hidden from other participants in the project.
+
+When using the `read_redcap()` function, DAGs are automatically exported if detected. You can toggle this option with the `export_data_access_groups` argument. If declared and/or detected, the `redcap_data` [data tibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble) will be augmented with an additional [data column](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column) called `redcap_data_access_group`, which indicates the assigned DAG for each record. 
+
+Let's look at a practical example below:
+
+```{r eval=FALSE}
+my_redcap_data <- read_redcap(redcap_uri, dag_token)
+
+my_redcap_data |>
+  extract_tibbles() |>
+  purrr::pluck(1)
+```
+
+```
+# A tibble: 4 × 4
+  record_id redcap_data_access_group non_repeat_form_1_txt form_status_complete
+      <dbl> <chr>                    <lgl>                 <fct>               
+1         1 dag1                     NA                    Complete            
+2         2 dag2                     NA                    Complete            
+3         3 dag3                     NA                    Complete            
+4         4 NA                       NA                    Incomplete  
+```
+
+Here, you can see the `redcap_data_access_group` column identifies which DAG the record belongs to as well as one example where a record wasn't assigned to any at the bottom. 

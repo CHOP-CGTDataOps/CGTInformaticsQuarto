@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#labelled-xlsx" id="toc-labelled-xlsx" class="nav-link" data-scroll-target="#labelled-xlsx">Labelled XLSX</a></li>
   <li><a href="#recoding-logical-columns" id="toc-recoding-logical-columns" class="nav-link" data-scroll-target="#recoding-logical-columns">Recoding Logical Columns</a></li>
   </ul></li>
+  <li><a href="#data-access-group-support" id="toc-data-access-group-support" class="nav-link" data-scroll-target="#data-access-group-support">Data Access Group Support 🏢</a></li>
   </ul>
 </nav>
     </div>
@@ -235,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.4.0 on CRAN! REDCapTidieR provides a user-friendly way to <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">import</a> data from a <a href="https://www.project-redcap.org/">REDCap</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">project</a> into the R environment.</p>
-<p>This blog post will introduce you to two brand new features for exploratory data analysis and data exportation.</p>
+<p>This blog post will introduce you to three brand new features we’re excited to share.</p>
 <p>You can install the current version from CRAN with:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"REDCapTidieR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -313,9 +314,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Columns derived from <strong>truefalse</strong> fields are left as is (<code>TRUE</code>/<code>FALSE</code>)</li>
 </ul>
 <p>Setting <code>recode_logical</code> to <code>FALSE</code> will preserve all logical fields as (<code>TRUE</code>/<code>FALSE</code>).</p>
-
-
 </section>
+</section>
+<section id="data-access-group-support" class="level2">
+<h2 class="anchored" data-anchor-id="data-access-group-support">Data Access Group Support 🏢</h2>
+<p>In REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">projects</a>, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-access-group">Data Access Groups</a> (DAGs) are used to assign user privileges and control record-level access. DAGs are particularly useful in multi-center studies where data for one participant needs to be kept hidden from other participants in the project.</p>
+<p>When using the <code>read_redcap()</code> function, DAGs are automatically exported if detected. You can toggle this option with the <code>export_data_access_groups</code> argument. If declared and/or detected, the <code>redcap_data</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> will be augmented with an additional <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">data column</a> called <code>redcap_data_access_group</code>, which indicates the assigned DAG for each record.</p>
+<p>Let’s look at a practical example below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, dag_token)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_tibbles</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code># A tibble: 4 × 4
+  record_id redcap_data_access_group non_repeat_form_1_txt form_status_complete
+      &lt;dbl&gt; &lt;chr&gt;                    &lt;lgl&gt;                 &lt;fct&gt;               
+1         1 dag1                     NA                    Complete            
+2         2 dag2                     NA                    Complete            
+3         3 dag3                     NA                    Complete            
+4         4 NA                       NA                    Incomplete  </code></pre>
+<p>Here, you can see the <code>redcap_data_access_group</code> column identifies which DAG the record belongs to as well as one example where a record wasn’t assigned to any at the bottom.</p>
+
+
 </section>
 
 </main> <!-- /main -->
