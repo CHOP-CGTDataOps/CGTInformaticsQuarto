@@ -243,8 +243,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="get-metadata-summary-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="get-metadata-summary-statistics">Get Metadata Summary Statistics 🔎</h2>
-<p>The <a href="https://docs.ropensci.org/skimr/">skimr</a> package is a powerful tool allowing users to quickly get summary statistics of their data. REDCapTidieR now provides a simple function that will automatically apply the appropriate metrics to the supertibble metadata using <code>add_skimr_metadata()</code>.</p>
-<p>Let’s take a look at what this does using the internal <code>superheroes_supertbl</code> dataset by first re-acquainting ourselves with a typical supertibble:</p>
+<p>The <a href="https://docs.ropensci.org/skimr/">skimr</a> package is a powerful tool allowing users to quickly get summary statistics of their data. REDCapTidieR now provides a simple function that will automatically apply the appropriate metrics to the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> metadata using <code>add_skimr_metadata()</code>.</p>
+<p>Let’s take a look at what this does using the internal <code>superheroes_supertbl</code> dataset by first re-acquainting ourselves with a typical <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-2_2288744ca444c60d7e02577e05c4c5ee">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -260,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Now, let’s apply our new function and observe some pre-selected metadata variables of interest in the <code>redcap_metadata</code> tibbles:</p>
+<p>Now, let’s apply our new function and observe some pre-selected metadata variables of interest in the <code>redcap_metadata</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#metadata-tibble">metadata tibbles</a>:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-3_09934e32dce7fc88691d6e81857dc051">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_supertbl <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_skimr_metadata</span>() <span class="sc">|&gt;</span> </span>
@@ -282,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="export-supertibbles-to-xlsx" class="level2">
 <h2 class="anchored" data-anchor-id="export-supertibbles-to-xlsx">Export Supertibbles to XLSX 📝</h2>
-<p>One of the most common mediums for data analysis and collaboration is the spreadsheet. With this update, you can now export your supertibble to Excel XLSX using the new <code>write_redcap_xlsx()</code> function. Let’s observe a couple of the output sheets:</p>
+<p>One of the most common mediums for data analysis and collaboration is the spreadsheet. With this release, you can now export your supertibble to Excel XLSX using the new <code>write_redcap_xlsx()</code> function. Let’s observe a couple of the output sheets:</p>
 <div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-4_e3de9e59444c412c4f75b73e30d16245">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>superheroes_supertbl <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -303,9 +303,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="recoding-logical-columns" class="level3">
 <h3 class="anchored" data-anchor-id="recoding-logical-columns">Recoding Logical Columns</h3>
 <p>By default, <code>write_redcap_xlsx()</code> will recode logical (<code>TRUE</code>/<code>FALSE</code>) columns into more human-friendly terms. This can be adjusted using the <code>recode_logical</code> argument:</p>
-<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-6_747323e6c79e2232e561280c2b959e92">
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-6_1446e6d462b3bdd3978b5272ab24a1ee">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes-labelled.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes-labelled.xlsx"</span>, <span class="at">recode_logical =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>write_redcap_xlsx()</code> uses the <a href="glossary.html#field-label">field label</a> to decide how to recode logical fields:</p>
 <ul>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When using the <code>read_redcap()</code> function, DAGs are automatically exported if detected. You can toggle this option with the <code>export_data_access_groups</code> argument. If declared and/or detected, the <code>redcap_data</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> will be augmented with an additional <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">data column</a> called <code>redcap_data_access_group</code>, which indicates the assigned DAG for each record.</p>
 <p>Let’s look at a practical example below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, dag_token)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, dag_token, <span class="at">export_data_access_groups =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_tibbles</span>() <span class="sc">|&gt;</span></span>

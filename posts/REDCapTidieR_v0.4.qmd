@@ -22,9 +22,9 @@ install.packages("REDCapTidieR")
 
 ## Get Metadata Summary Statistics 🔎
 
-The [skimr](https://docs.ropensci.org/skimr/) package is a powerful tool allowing users to quickly get summary statistics of their data. REDCapTidieR now provides a simple function that will automatically apply the appropriate metrics to the supertibble metadata using `add_skimr_metadata()`.
+The [skimr](https://docs.ropensci.org/skimr/) package is a powerful tool allowing users to quickly get summary statistics of their data. REDCapTidieR now provides a simple function that will automatically apply the appropriate metrics to the [supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble) metadata using `add_skimr_metadata()`.
 
-Let's take a look at what this does using the internal `superheroes_supertbl` dataset by first re-acquainting ourselves with a typical supertibble:
+Let's take a look at what this does using the internal `superheroes_supertbl` dataset by first re-acquainting ourselves with a typical [supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble):
 
 ```{r}
 #| include: true
@@ -38,7 +38,7 @@ superheroes_supertbl |>
   rmarkdown::paged_table()
 ```
 
-Now, let's apply our new function and observe some pre-selected metadata variables of interest in the `redcap_metadata` tibbles:
+Now, let's apply our new function and observe some pre-selected metadata variables of interest in the `redcap_metadata` [metadata tibbles](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#metadata-tibble):
 
 ```{r}
 #| include: true
@@ -60,7 +60,7 @@ Curious about what metrics are available? You can find out more using `skimr::ge
 
 ## Export Supertibbles to XLSX 📝
 
-One of the most common mediums for data analysis and collaboration is the spreadsheet. With this update, you can now export your supertibble to Excel XLSX using the new `write_redcap_xlsx()` function. Let's observe a couple of the output sheets:
+One of the most common mediums for data analysis and collaboration is the spreadsheet. With this release, you can now export your supertibble to Excel XLSX using the new `write_redcap_xlsx()` function. Let's observe a couple of the output sheets:
 
 ```{r}
 #| include: true
@@ -102,7 +102,7 @@ By default, `write_redcap_xlsx()` will recode logical (`TRUE`/`FALSE`) columns i
 #| cache: true
 #| eval: false
 superheroes %>%
-   write_redcap_xlsx("superheroes-labelled.xlsx")
+   write_redcap_xlsx("superheroes-labelled.xlsx", recode_logical = TRUE)
 ```
 
 `write_redcap_xlsx()` uses the [field label](glossary.html#field-label) to decide how to recode logical fields:
@@ -122,7 +122,7 @@ When using the `read_redcap()` function, DAGs are automatically exported if dete
 Let's look at a practical example below:
 
 ```{r eval=FALSE}
-my_redcap_data <- read_redcap(redcap_uri, dag_token)
+my_redcap_data <- read_redcap(redcap_uri, dag_token, export_data_access_groups = TRUE)
 
 my_redcap_data |>
   extract_tibbles() |>
