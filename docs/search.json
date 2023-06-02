@@ -112,6 +112,20 @@
     "text": "Data Access Group Support 🏢\nIn REDCap projects, Data Access Groups (DAGs) are used to assign user privileges and control record-level access. DAGs are particularly useful in multi-center studies where data for one participant needs to be kept hidden from other participants in the project.\nWhen using the read_redcap() function, DAGs are automatically exported if detected. You can toggle this option with the export_data_access_groups argument. If declared and/or detected, the redcap_data data tibble will be augmented with an additional data column called redcap_data_access_group, which indicates the assigned DAG for each record.\nLet’s look at a practical example below:\n\nmy_redcap_data <- read_redcap(redcap_uri, dag_token, export_data_access_groups = TRUE)\n\nmy_redcap_data |>\n  extract_tibbles() |>\n  purrr::pluck(1)\n\n# A tibble: 4 × 4\n  record_id redcap_data_access_group non_repeat_form_1_txt form_status_complete\n      <dbl> <chr>                    <lgl>                 <fct>               \n1         1 dag1                     NA                    Complete            \n2         2 dag2                     NA                    Complete            \n3         3 dag3                     NA                    Complete            \n4         4 NA                       NA                    Incomplete  \nHere, you can see the redcap_data_access_group column identifies which DAG the record belongs to as well as one example where a record wasn’t assigned to any at the bottom."
   },
   {
+    "objectID": "posts/REDCapTidieR_v0.4.html#bug-fixes",
+    "href": "posts/REDCapTidieR_v0.4.html#bug-fixes",
+    "title": "REDCapTidieR 0.4.0",
+    "section": "Bug Fixes",
+    "text": "Bug Fixes\n\nFixed a bug where REDCapR API error messages weren’t being returned from REDCapTidieR"
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v0.4.html#miscellaneous",
+    "href": "posts/REDCapTidieR_v0.4.html#miscellaneous",
+    "title": "REDCapTidieR 0.4.0",
+    "section": "Miscellaneous",
+    "text": "Miscellaneous\n\nAll deprecated functions have been officially retired and removed from the package"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to CGT Informatics!",

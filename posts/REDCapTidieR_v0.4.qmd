@@ -140,3 +140,11 @@ my_redcap_data |>
 ```
 
 Here, you can see the `redcap_data_access_group` column identifies which DAG the record belongs to as well as one example where a record wasn't assigned to any at the bottom. 
+
+## Bug Fixes
+
+-   Fixed a bug where REDCapR API error messages weren't being returned from REDCapTidieR
+
+## Miscellaneous
+
+-   All deprecated functions have been officially retired and removed from the package
