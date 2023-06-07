@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
+<meta name="description" content="REDCapTidieR v0.4.0 Release Announcement">
+
+<title>Cell and Gene Therapy Informatics - REDCapTidieR 0.4.0</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/cgt_informatics_bg_removed.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Cell and Gene Therapy Informatics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/CHOP-CGTInformatics"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#get-metadata-summary-statistics" id="toc-get-metadata-summary-statistics" class="nav-link active" data-scroll-target="#get-metadata-summary-statistics">Get Metadata Summary Statistics 🔎</a></li>
+  <li><a href="#export-supertibbles-to-xlsx" id="toc-export-supertibbles-to-xlsx" class="nav-link" data-scroll-target="#export-supertibbles-to-xlsx">Export Supertibbles to XLSX 📝</a>
+  <ul class="collapse">
+  <li><a href="#labelled-xlsx" id="toc-labelled-xlsx" class="nav-link" data-scroll-target="#labelled-xlsx">Labelled XLSX</a></li>
+  <li><a href="#recoding-logical-columns" id="toc-recoding-logical-columns" class="nav-link" data-scroll-target="#recoding-logical-columns">Recoding Logical Columns</a></li>
+  </ul></li>
+  <li><a href="#data-access-group-support" id="toc-data-access-group-support" class="nav-link" data-scroll-target="#data-access-group-support">Data Access Group Support 🏢</a></li>
+  <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug Fixes</a></li>
+  <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous">Miscellaneous</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">REDCapTidieR 0.4.0</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">REDCap</div>
+    <div class="quarto-category">REDCapTidieR</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    REDCapTidieR v0.4.0 Release Announcement
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Stephan Kadauke, Ezra Porter, Richard Hanna </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>We’re thrilled to announce the release of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> v0.4.0 on CRAN! REDCapTidieR provides a user-friendly way to <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#import">import</a> data from a <a href="https://www.project-redcap.org/">REDCap</a> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">project</a> into the R environment.</p>
+<p>This blog post will introduce you to three brand new features we’re excited to share.</p>
+<p>You can install the current version from CRAN with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"REDCapTidieR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="get-metadata-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="get-metadata-summary-statistics">Get Metadata Summary Statistics 🔎</h2>
+<p>The <a href="https://docs.ropensci.org/skimr/">skimr</a> package is a powerful tool allowing users to quickly get summary statistics of their data. REDCapTidieR now provides a simple function that will automatically apply the appropriate metrics to the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> metadata using <code>add_skimr_metadata()</code>.</p>
+<p>Let’s take a look at what this does using the internal <code>superheroes_supertbl</code> dataset by first re-acquainting ourselves with a typical <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-2_2288744ca444c60d7e02577e05c4c5ee">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(REDCapTidieR)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>superheroes_supertbl <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["redcap_form_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["redcap_form_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["redcap_data"],"name":[3],"type":["list"],"align":["right"]},{"label":["redcap_metadata"],"name":[4],"type":["list"],"align":["right"]},{"label":["structure"],"name":[5],"type":["chr"],"align":["left"]},{"label":["data_rows"],"name":[6],"type":["int"],"align":["right"]},{"label":["data_cols"],"name":[7],"type":["int"],"align":["right"]},{"label":["data_size"],"name":[8],"type":["lbstr_by"],"align":["right"]},{"label":["data_na_pct"],"name":[9],"type":["formttbl"],"align":["right"]}],"data":[{"1":"heroes_information","2":"Heroes Information","3":"<tibble[,12]>","4":"<tibble[,17]>","5":"nonrepeating","6":"734","7":"12","8":"123.24 kB","9":"0.23%"},{"1":"super_hero_powers","2":"Super Hero Powers","3":"<tibble[,4]>","4":"<tibble[,17]>","5":"repeating","6":"5966","7":"4","8":"180.21 kB","9":"0%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now, let’s apply our new function and observe some pre-selected metadata variables of interest in the <code>redcap_metadata</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#metadata-tibble">metadata tibbles</a>:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-3_09934e32dce7fc88691d6e81857dc051">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>superheroes_supertbl <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_skimr_metadata</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(redcap_metadata) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">18</span><span class="sc">:</span><span class="dv">33</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["field_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["field_label"],"name":[2],"type":["chr"],"align":["left"]},{"label":["skim_type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["n_missing"],"name":[4],"type":["int"],"align":["right"]},{"label":["complete_rate"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["character.min"],"name":[6],"type":["int"],"align":["right"]},{"label":["character.max"],"name":[7],"type":["int"],"align":["right"]},{"label":["character.empty"],"name":[8],"type":["int"],"align":["right"]},{"label":["character.n_unique"],"name":[9],"type":["int"],"align":["right"]},{"label":["character.whitespace"],"name":[10],"type":["int"],"align":["right"]},{"label":["numeric.mean"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["numeric.sd"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["numeric.p0"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["numeric.p25"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["numeric.p50"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["numeric.p75"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["numeric.p100"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["numeric.hist"],"name":[18],"type":["chr"],"align":["left"]}],"data":[{"1":"record_id","2":"Record ID","3":"NA","4":"NA","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"name","2":"Hero name:","3":"character","4":"0","5":"1.0000000","6":"1","7":"25","8":"0","9":"715","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"gender","2":"Gender","3":"character","4":"0","5":"1.0000000","6":"1","7":"6","8":"0","9":"3","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"eye_color","2":"Eye color","3":"character","4":"0","5":"1.0000000","6":"1","7":"23","8":"0","9":"23","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"race","2":"Race","3":"character","4":"0","5":"1.0000000","6":"1","7":"18","8":"0","9":"62","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"hair_color","2":"Hair color","3":"character","4":"0","5":"1.0000000","6":"1","7":"16","8":"0","9":"30","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"height","2":"Height","3":"numeric","4":"0","5":"1.0000000","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"102.25409","12":"139.6245","13":"-99","14":"-99","15":"175","16":"185","17":"975","18":"▃▇▁▁▁"},{"1":"weight","2":"Weight","3":"numeric","4":"2","5":"0.9972752","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"43.85519","12":"130.8237","13":"-99","14":"-99","15":"62","16":"90","17":"900","18":"▇▂▁▁▁"},{"1":"publisher","2":"Publisher","3":"character","4":"15","5":"0.9795640","6":"4","7":"17","8":"0","9":"24","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"skin_color","2":"Skin Color","3":"character","4":"0","5":"1.0000000","6":"1","7":"14","8":"0","9":"17","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"alignment","2":"Alignment","3":"character","4":"0","5":"1.0000000","6":"1","7":"7","8":"0","9":"4","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"record_id","2":"Record ID","3":"NA","4":"NA","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"},{"1":"power","2":"Super Power:","3":"character","4":"0","5":"1.0000000","6":"4","7":"28","8":"0","9":"167","10":"0","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>In addition to the typical metadata columns, we now see a slew of new columns providing metadata statistics! <code>add_skimr_metadata()</code> will automatically detect and apply the appropriate metrics based on the REDCap metadata.</p>
+<p>Curious about what metrics are available? You can find out more using <code>skimr::get_default_skimmer_names()</code> and check out the <a href="https://docs.ropensci.org/skimr/reference/get_default_skimmers.html">documentation</a>.</p>
+</section>
+<section id="export-supertibbles-to-xlsx" class="level2">
+<h2 class="anchored" data-anchor-id="export-supertibbles-to-xlsx">Export Supertibbles to XLSX 📝</h2>
+<p>One of the most common mediums for data analysis and collaboration is the spreadsheet. With this release, you can now export your supertibble to Excel XLSX using the new <code>write_redcap_xlsx()</code> function. Let’s observe a couple of the output sheets:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-4_e3de9e59444c412c4f75b73e30d16245">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>superheroes_supertbl <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/write_xlsx_default.png" class="img-fluid" alt="XLSX default output"></p>
+<p><img src="images/write_xlsx_heroes_information.png" class="img-fluid" alt="XLSX Heroes Information sheet"></p>
+<p>By default, when opening the Excel document you’ll see multiple sheets. The first is the <strong>Table of Contents</strong>, followed by individual sheets for each instrument’s data, and ending with <strong>REDCap Metadata</strong>. The <strong>Table of Contents</strong> provides an overview of data present in the rest of the document while <strong>REDCap Metadata</strong> provides metadata for <em>all</em> fields from <em>all</em> instruments in one location. Each of these are optional and can be turned off if you only want the data sheets.</p>
+<section id="labelled-xlsx" class="level3">
+<h3 class="anchored" data-anchor-id="labelled-xlsx">Labelled XLSX</h3>
+<p>As introduced in <a href="REDCapTidieR_v0.2.html#redcaptidier-labelled">REDCapTidieR v0.2.0</a>, the labelled package can still be used in your XLSX output files. By using the <code>make_labelled()</code> function, you can now integrate your labels into your Excel sheets:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-5_40b4aabf2f7902ed90a73b80d0ae553e">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">make_labelled</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes-labelled.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/write_xlsx_supertbl_labelled.png" class="img-fluid" alt="XLSX Heroes Information labelled"> Observe how the first row now contains human-readable labels!</p>
+</section>
+<section id="recoding-logical-columns" class="level3">
+<h3 class="anchored" data-anchor-id="recoding-logical-columns">Recoding Logical Columns</h3>
+<p>By default, <code>write_redcap_xlsx()</code> will recode logical (<code>TRUE</code>/<code>FALSE</code>) columns into more human-friendly terms. This can be adjusted using the <code>recode_logical</code> argument:</p>
+<div class="cell" data-hash="REDCapTidieR_v0.4_cache/html/unnamed-chunk-6_1446e6d462b3bdd3978b5272ab24a1ee">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>superheroes <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">write_redcap_xlsx</span>(<span class="st">"superheroes-labelled.xlsx"</span>, <span class="at">recode_logical =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>write_redcap_xlsx()</code> uses the <a href="glossary.html#field-label">field label</a> to decide how to recode logical fields:</p>
+<ul>
+<li>Columns derived from <strong>yesno</strong> fields are recoded from <code>TRUE</code>/<code>FALSE</code> to <code>yes</code>/<code>no</code></li>
+<li>Columns derived from <strong>checkbox</strong> fields are recoded from <code>TRUE</code>/<code>FALSE</code> to <code>Checked</code>/<code>Unchecked</code></li>
+<li>Columns derived from <strong>truefalse</strong> fields are left as is (<code>TRUE</code>/<code>FALSE</code>)</li>
+</ul>
+<p>Setting <code>recode_logical</code> to <code>FALSE</code> will preserve all logical fields as (<code>TRUE</code>/<code>FALSE</code>).</p>
+</section>
+</section>
+<section id="data-access-group-support" class="level2">
+<h2 class="anchored" data-anchor-id="data-access-group-support">Data Access Group Support 🏢</h2>
+<p>In REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#project">projects</a>, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-access-group">Data Access Groups</a> (DAGs) are used to assign user privileges and control record-level access. DAGs are particularly useful in multi-center studies where data for one participant needs to be kept hidden from other participants in the project.</p>
+<p>When using the <code>read_redcap()</code> function, DAGs are automatically exported if detected. You can toggle this option with the <code>export_data_access_groups</code> argument. If declared and/or detected, the <code>redcap_data</code> <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibble</a> will be augmented with an additional <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-column">data column</a> called <code>redcap_data_access_group</code>, which indicates the assigned DAG for each record.</p>
+<p>Let’s look at a practical example below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="ot">&lt;-</span> <span class="fu">read_redcap</span>(redcap_uri, dag_token, <span class="at">export_data_access_groups =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>my_redcap_data <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_tibbles</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code># A tibble: 4 × 4
+  record_id redcap_data_access_group non_repeat_form_1_txt form_status_complete
+      &lt;dbl&gt; &lt;chr&gt;                    &lt;lgl&gt;                 &lt;fct&gt;               
+1         1 dag1                     NA                    Complete            
+2         2 dag2                     NA                    Complete            
+3         3 dag3                     NA                    Complete            
+4         4 NA                       NA                    Incomplete  </code></pre>
+<p>Here, you can see the <code>redcap_data_access_group</code> column identifies which DAG the record belongs to as well as one example where a record wasn’t assigned to any at the bottom.</p>
+</section>
+<section id="bug-fixes" class="level2">
+<h2 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h2>
+<ul>
+<li>Fixed a bug where REDCapR API error messages weren’t being returned from REDCapTidieR</li>
+</ul>
+</section>
+<section id="miscellaneous" class="level2">
+<h2 class="anchored" data-anchor-id="miscellaneous">Miscellaneous</h2>
+<ul>
+<li>All deprecated functions have been officially retired and removed from the package</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Made with ❤️ in Philadelphia
+  </li>  
+</ul>
+      </div>
+  </div>
+</footer>
+
+
+
+</body></html>
