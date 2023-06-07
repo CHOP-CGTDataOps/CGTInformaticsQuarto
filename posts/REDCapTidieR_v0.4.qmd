@@ -2,7 +2,7 @@
 title: REDCapTidieR 0.4.0
 image: images/REDCapTidieR.png
 author: Stephan Kadauke, Ezra Porter, Richard Hanna
-date: "2023-05-__"
+date: "2023-06-07"
 description: "REDCapTidieR v0.4.0 Release Announcement"
 categories:
   - REDCap
