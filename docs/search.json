@@ -1,5 +1,40 @@
 [
   {
+    "objectID": "posts/REDCapTidieR_v1.0.0.html",
+    "href": "posts/REDCapTidieR_v1.0.0.html",
+    "title": "REDCapTidieR 1.0.0 🎉",
+    "section": "",
+    "text": "We’re delighted to announce that REDCapTidieR has earned v1.0.0 status on CRAN! REDCapTidieR provides a user-friendly way to import data from a REDCap project into the R environment.\nYou can install the package from CRAN with:\nIt’s hard to believe, but REDCapTidieR has been in development for over a year since the CGT Informatics team began working on it in July of 2022. During that time, the package has taken on a number of changes, feature considerations, and optimizations that we believe make this package worthy of being considered stable (🎉).\nWhile there are no new features to announce, this post will take the opportunity to walk down memory lane and review the road map that got us to where we are today."
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#the-early-beginnings",
+    "href": "posts/REDCapTidieR_v1.0.0.html#the-early-beginnings",
+    "title": "REDCapTidieR 1.0.0 🎉",
+    "section": "The Early Beginnings",
+    "text": "The Early Beginnings\nAs with most packages, the impetus for creating REDCapTidieR started with frustration in a project. At the Children’s Hospital of Philadelphia, the CGT Informatics team supports a number of REDCap databases responsible for clinical trial data by providing applications, dashboards, and reports. It became clear after the first few interactions with these longitudinal databases, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable formats for visualization and reporting.\nAs avid R users and subscribers to “tidy data,” we quickly realized how unwieldy the standard REDCap block matrix output was and that there was an opportunity to standardize it into a format that aligns with tidy data principles. After assessing the landscape of REDCap tools available for programmatic interaction, we found that there wasn’t a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own."
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#extensions-and-additional-features",
+    "href": "posts/REDCapTidieR_v1.0.0.html#extensions-and-additional-features",
+    "title": "REDCapTidieR 1.0.0 🎉",
+    "section": "Extensions and Additional Features",
+    "text": "Extensions and Additional Features\nThe user interface of REDCapTidieR has always been at the forefront of our design considerations and we make certain to ensure it is easy to use, easy to navigate, and suits most common needs. You wouldn’t believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the updated core functions when we realized we didn’t like the ones we chose anymore. Once we felt REDCapTidieR’s core functionality was working, we expanded its capabilities.\nFirst we gave it the ability to support variable labels using the labelled package, making it easier to view data in a more readable way using a simple call to REDCapTidieR::make_labelled().\nWe further extended it by introducing the write_redcap_xlsx() function, letting users tap into the openxlsx2 package and convert their data tibbles into XLSX sheets."
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#acknolwedgements",
+    "href": "posts/REDCapTidieR_v1.0.0.html#acknolwedgements",
+    "title": "REDCapTidieR 1.0.0 🎉",
+    "section": "Acknolwedgements",
+    "text": "Acknolwedgements\nREDCapTidieR is the first open source package our team has made available to the community. The success of it wouldn’t be possible without the support and collaboration of the those who helped with its development, opened issues, or contributed to discussions: @camcaan, @JanMarvin, @matthieu-faron, @olivroy, @pwildenhain, @tschuler, @wibeasley."
+  },
+  {
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#miscellaneous",
+    "href": "posts/REDCapTidieR_v1.0.0.html#miscellaneous",
+    "title": "REDCapTidieR 1.0.0 🎉",
+    "section": "Miscellaneous",
+    "text": "Miscellaneous\n\nUpdated any functions that relied on openxlsx2 to use the newest stable functions of its 1.0 release\nInternal package cleaning and consolidation\nUpdates to the pkgdown site"
+  },
+  {
     "objectID": "posts/REDCapTidieR_v0.2.html",
     "href": "posts/REDCapTidieR_v0.2.html",
     "title": "REDCapTidieR 0.2.0 ☃️",
@@ -165,6 +200,6 @@
     "href": "posts.html",
     "title": "Posts",
     "section": "",
-    "text": "REDCapTidieR 0.4.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.4.0 Release Announcement\n\n\n\n\n\n\nJun 7, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.3.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.3.0 Release Announcement\n\n\n\n\n\n\nFeb 28, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nDec 6, 2022\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
+    "text": "REDCapTidieR 1.0.0 🎉\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v1.0.0 Release Announcement\n\n\n\n\n\n\nNov 15, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.4.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.4.0 Release Announcement\n\n\n\n\n\n\nJun 7, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.3.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.3.0 Release Announcement\n\n\n\n\n\n\nFeb 28, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nDec 6, 2022\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }
 ]
