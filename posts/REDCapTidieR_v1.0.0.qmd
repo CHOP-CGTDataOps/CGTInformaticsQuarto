@@ -22,24 +22,42 @@ It's hard to believe, but REDCapTidieR has been in development for over a year s
 
 While there are no new features to announce, this post will take the opportunity to walk down memory lane and review the road map that got us to where we are today.
 
-> things to review
+> Other things to consider and review
 
 - performance improvements
 - JOSS paper acceptance?
 
 ## The Early Beginnings
 
-As with most packages, the impetus for creating REDCapTidieR started with frustration in a project. At the Children's Hospital of Philadelphia, the [CGT Informatics team](https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team) supports a number of [REDCap](https://www.project-redcap.org/) databases responsible for clinical trial data by providing applications, dashboards, and reports. It became clear after the first few interactions with these longitudinal databases, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable formats for visualization and reporting.
+As with most software solutions, the motivation for creating REDCapTidieR began with frustration. At the Children's Hospital of Philadelphia, the [CGT Informatics team](https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team) supports a number of [REDCap](https://www.project-redcap.org/) databases responsible for clinical trial data by providing applications, dashboards, and reports to principal investigators for their respective studies. It became clear after the first few interactions with these longitudinal datasets, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable, reportable formats.
 
-As avid R users and subscribers to "[tidy data](https://www.jstatsoft.org/article/view/v059i10)," we quickly realized how unwieldy the standard REDCap [block matrix](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html#the-block-matrix) output was and that there was an opportunity to standardize it into a format that aligns with tidy data principles. After assessing the landscape of [REDCap tools](https://redcap-tools.github.io/projects/) available for programmatic interaction, we found that there wasn't a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own.
+As avid R users and subscribers to "[tidy data](https://www.jstatsoft.org/article/view/v059i10)," we quickly realized how unwieldy the standard REDCap [block matrix](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html#the-block-matrix) output was and that there was an opportunity to reshape it into a format that aligns with tidy data principles. After assessing the landscape of [REDCap tools](https://redcap-tools.github.io/projects/) available for programmatic interaction, we found that there wasn't a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own.
+
+## Not a Bird, Not a Plane, but a Supertibble
+
+In order to accommodate tidy data principles, the new format of the block matrix had to meet the following criteria:
+
+- Each variable had to form a column
+- Each observation had to form a row
+- Each type of observational unit had to form a table
+
+While the block matrix can be considered to pass the first two criteria, longitudinal REDCap projects that contain repeating instruments and events result in inconsistent granularity between rows. To reintroduce consistency, we needed to break apart the block matrix into sub-tables, i.e. [data tibbles](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble). This would allow us to handle the [composite primary keys](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#composite-primary-key) that make up the identifiers for repeating instruments and events by representing each instrument in an individual table with only the identifier columns necessary to form its key.
+
+Apart from being fun to say, arriving at the "[supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble)" was a natural next step for consolidating all of these data tibbles under one roof. The supertibble is the vehicle for containing a REDCap projects data tibbles, identified by instrument name, metadata tibbles, and various other pieces of information about the instrument. From here, users can easily join together the data they need for their use cases or take advantage of the `bind_tibbles()` / `bind_tibble()` functions to place them directly into their programming environment.
+
+![Labelled Supertibble](images/labelled_supertibble.png)
 
 ## Extensions and Additional Features
 
-The user interface of REDCapTidieR has always been at the forefront of our design considerations and we make certain to ensure it is easy to use, easy to navigate, and suits most common needs. You wouldn't believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the updated core functions when we realized [we didn't like the ones we chose anymore](https://chop-cgtinformatics.github.io/CGTInformaticsQuarto/posts/REDCapTidieR_v0.2.html#why-on-earth-would-you-do-that). Once we felt REDCapTidieR's core functionality was working, we expanded its capabilities.
+We put a considerable amount of effort into making sure the user interface of REDCapTidieR is easy to use, easy to navigate, and suits most common needs. You wouldn't believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the _updated_ core functions when we realized [we didn't like the ones we chose anymore](https://chop-cgtinformatics.github.io/CGTInformaticsQuarto/posts/REDCapTidieR_v0.2.html#why-on-earth-would-you-do-that). Once we solidified the core functionality, we expanded REDCapTidieR's capabilities.
 
-First we gave it the ability to [support variable labels](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package) using the [labelled](https://larmarange.github.io/labelled/) package, making it easier to view data in a more readable way using a simple call to `REDCapTidieR::make_labelled()`.
+First we incorporated [variable labels support](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package) through the [labelled](https://larmarange.github.io/labelled/) package. With a simple call to `make_labelled()`, users can effortlessly enhance data readability, allowing for easier interpretation and analysis by adding labels to their data tibbles.
 
-We further extended it by introducing the `write_redcap_xlsx()` function, letting users tap into the [openxlsx2](https://janmarvin.github.io/openxlsx2/) package and convert their data tibbles into XLSX sheets. 
+![Labelled Tibble](images/labelled_tibble.png)
+
+By tapping into the [openxlsx2](https://janmarvin.github.io/openxlsx2/) package, we opened the sueprtibble up to XLSX export capability. By using `write_redcap_xlsx()`, users can immediately conver their data tibbles to spreadsheets where each data tibble comprises its own XLSX sheet, expanding the flexibility of data management that REDCapTidieR can provide.
+
+![](images/write_xlsx_heroes_information.png)
 
 ## Acknolwedgements
 

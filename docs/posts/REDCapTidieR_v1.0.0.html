@@ -182,6 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#the-early-beginnings" id="toc-the-early-beginnings" class="nav-link active" data-scroll-target="#the-early-beginnings">The Early Beginnings</a></li>
+  <li><a href="#not-a-bird-not-a-plane-but-a-supertibble" id="toc-not-a-bird-not-a-plane-but-a-supertibble" class="nav-link" data-scroll-target="#not-a-bird-not-a-plane-but-a-supertibble">Not a Bird, Not a Plane, but a Supertibble</a></li>
   <li><a href="#extensions-and-additional-features" id="toc-extensions-and-additional-features" class="nav-link" data-scroll-target="#extensions-and-additional-features">Extensions and Additional Features</a></li>
   <li><a href="#acknolwedgements" id="toc-acknolwedgements" class="nav-link" data-scroll-target="#acknolwedgements">Acknolwedgements</a></li>
   <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous">Miscellaneous</a></li>
@@ -238,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It’s hard to believe, but REDCapTidieR has been in development for over a year since the CGT Informatics team began working on it in July of 2022. During that time, the package has taken on a number of changes, feature considerations, and optimizations that we believe make this package worthy of being considered stable (🎉).</p>
 <p>While there are no new features to announce, this post will take the opportunity to walk down memory lane and review the road map that got us to where we are today.</p>
 <blockquote class="blockquote">
-<p>things to review</p>
+<p>Other things to consider and review</p>
 </blockquote>
 <ul>
 <li>performance improvements</li>
@@ -246,14 +247,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <section id="the-early-beginnings" class="level2">
 <h2 class="anchored" data-anchor-id="the-early-beginnings">The Early Beginnings</h2>
-<p>As with most packages, the impetus for creating REDCapTidieR started with frustration in a project. At the Children’s Hospital of Philadelphia, the <a href="https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team">CGT Informatics team</a> supports a number of <a href="https://www.project-redcap.org/">REDCap</a> databases responsible for clinical trial data by providing applications, dashboards, and reports. It became clear after the first few interactions with these longitudinal databases, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable formats for visualization and reporting.</p>
-<p>As avid R users and subscribers to “<a href="https://www.jstatsoft.org/article/view/v059i10">tidy data</a>,” we quickly realized how unwieldy the standard REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html#the-block-matrix">block matrix</a> output was and that there was an opportunity to standardize it into a format that aligns with tidy data principles. After assessing the landscape of <a href="https://redcap-tools.github.io/projects/">REDCap tools</a> available for programmatic interaction, we found that there wasn’t a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own.</p>
+<p>As with most software solutions, the motivation for creating REDCapTidieR began with frustration. At the Children’s Hospital of Philadelphia, the <a href="https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team">CGT Informatics team</a> supports a number of <a href="https://www.project-redcap.org/">REDCap</a> databases responsible for clinical trial data by providing applications, dashboards, and reports to principal investigators for their respective studies. It became clear after the first few interactions with these longitudinal datasets, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable, reportable formats.</p>
+<p>As avid R users and subscribers to “<a href="https://www.jstatsoft.org/article/view/v059i10">tidy data</a>,” we quickly realized how unwieldy the standard REDCap <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/diving_deeper.html#the-block-matrix">block matrix</a> output was and that there was an opportunity to reshape it into a format that aligns with tidy data principles. After assessing the landscape of <a href="https://redcap-tools.github.io/projects/">REDCap tools</a> available for programmatic interaction, we found that there wasn’t a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own.</p>
+</section>
+<section id="not-a-bird-not-a-plane-but-a-supertibble" class="level2">
+<h2 class="anchored" data-anchor-id="not-a-bird-not-a-plane-but-a-supertibble">Not a Bird, Not a Plane, but a Supertibble</h2>
+<p>In order to accommodate tidy data principles, the new format of the block matrix had to meet the following criteria:</p>
+<ul>
+<li>Each variable had to form a column</li>
+<li>Each observation had to form a row</li>
+<li>Each type of observational unit had to form a table</li>
+</ul>
+<p>While the block matrix can be considered to pass the first two criteria, longitudinal REDCap projects that contain repeating instruments and events result in inconsistent granularity between rows. To reintroduce consistency, we needed to break apart the block matrix into sub-tables, i.e.&nbsp;<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#data-tibble">data tibbles</a>. This would allow us to handle the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#composite-primary-key">composite primary keys</a> that make up the identifiers for repeating instruments and events by representing each instrument in an individual table with only the identifier columns necessary to form its key.</p>
+<p>Apart from being fun to say, arriving at the “<a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a>” was a natural next step for consolidating all of these data tibbles under one roof. The supertibble is the vehicle for containing a REDCap projects data tibbles, identified by instrument name, metadata tibbles, and various other pieces of information about the instrument. From here, users can easily join together the data they need for their use cases or take advantage of the <code>bind_tibbles()</code> / <code>bind_tibble()</code> functions to place them directly into their programming environment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/labelled_supertibble.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Labelled Supertibble</figcaption><p></p>
+</figure>
+</div>
 </section>
 <section id="extensions-and-additional-features" class="level2">
 <h2 class="anchored" data-anchor-id="extensions-and-additional-features">Extensions and Additional Features</h2>
-<p>The user interface of REDCapTidieR has always been at the forefront of our design considerations and we make certain to ensure it is easy to use, easy to navigate, and suits most common needs. You wouldn’t believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the updated core functions when we realized <a href="https://chop-cgtinformatics.github.io/CGTInformaticsQuarto/posts/REDCapTidieR_v0.2.html#why-on-earth-would-you-do-that">we didn’t like the ones we chose anymore</a>. Once we felt REDCapTidieR’s core functionality was working, we expanded its capabilities.</p>
-<p>First we gave it the ability to <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package">support variable labels</a> using the <a href="https://larmarange.github.io/labelled/">labelled</a> package, making it easier to view data in a more readable way using a simple call to <code>REDCapTidieR::make_labelled()</code>.</p>
-<p>We further extended it by introducing the <code>write_redcap_xlsx()</code> function, letting users tap into the <a href="https://janmarvin.github.io/openxlsx2/">openxlsx2</a> package and convert their data tibbles into XLSX sheets.</p>
+<p>We put a considerable amount of effort into making sure the user interface of REDCapTidieR is easy to use, easy to navigate, and suits most common needs. You wouldn’t believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the <em>updated</em> core functions when we realized <a href="https://chop-cgtinformatics.github.io/CGTInformaticsQuarto/posts/REDCapTidieR_v0.2.html#why-on-earth-would-you-do-that">we didn’t like the ones we chose anymore</a>. Once we solidified the core functionality, we expanded REDCapTidieR’s capabilities.</p>
+<p>First we incorporated <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package">variable labels support</a> through the <a href="https://larmarange.github.io/labelled/">labelled</a> package. With a simple call to <code>make_labelled()</code>, users can effortlessly enhance data readability, allowing for easier interpretation and analysis by adding labels to their data tibbles.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/labelled_tibble.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Labelled Tibble</figcaption><p></p>
+</figure>
+</div>
+<p>By tapping into the <a href="https://janmarvin.github.io/openxlsx2/">openxlsx2</a> package, we opened the sueprtibble up to XLSX export capability. By using <code>write_redcap_xlsx()</code>, users can immediately conver their data tibbles to spreadsheets where each data tibble comprises its own XLSX sheet, expanding the flexibility of data management that REDCapTidieR can provide.</p>
+<p><img src="images/write_xlsx_heroes_information.png" class="img-fluid"></p>
 </section>
 <section id="acknolwedgements" class="level2">
 <h2 class="anchored" data-anchor-id="acknolwedgements">Acknolwedgements</h2>
