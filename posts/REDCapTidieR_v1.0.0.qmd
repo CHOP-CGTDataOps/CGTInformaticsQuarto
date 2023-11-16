@@ -22,11 +22,6 @@ It's hard to believe, but REDCapTidieR has been in development for over a year s
 
 While there are no new features to announce, this post will take the opportunity to walk down memory lane and review the road map that got us to where we are today.
 
-> Other things to consider and review
-
-- performance improvements
-- JOSS paper acceptance?
-
 ## The Early Beginnings
 
 As with most software solutions, the motivation for creating REDCapTidieR began with frustration. At the Children's Hospital of Philadelphia, the [CGT Informatics team](https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team) supports a number of [REDCap](https://www.project-redcap.org/) databases responsible for clinical trial data by providing applications, dashboards, and reports to principal investigators for their respective studies. It became clear after the first few interactions with these longitudinal datasets, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable, reportable formats.
