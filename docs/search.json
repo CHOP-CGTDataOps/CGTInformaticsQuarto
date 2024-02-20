@@ -2,44 +2,37 @@
   {
     "objectID": "posts/REDCapTidieR_v1.0.0.html",
     "href": "posts/REDCapTidieR_v1.0.0.html",
-    "title": "REDCapTidieR 1.0.0 🎉",
+    "title": "REDCapTidieR 1.0.0 & JOSS Publication 🎉",
     "section": "",
-    "text": "We’re delighted to announce that REDCapTidieR has earned v1.0.0 status on CRAN! REDCapTidieR provides a user-friendly way to import data from a REDCap project into the R environment.\nYou can install the package from CRAN with:\nIt’s hard to believe, but REDCapTidieR has been in development for over a year since the CGT Informatics team began working on it in July of 2022. During that time, the package has taken on a number of changes, feature considerations, and optimizations that we believe make this package worthy of being considered stable (🎉).\nWhile there are no new features to announce, this post will take the opportunity to walk down memory lane and review the road map that got us to where we are today."
+    "text": "We’re a bit overdue, but delighted to announce that the v1.0.0 version of REDCapTidieR has been released to CRAN! Additionally, we have officially published our first paper in The Journal of Open Source Software (JOSS) under “REDCapTideR: Extracting complex REDCap databases into tidy tables”.\nYou can install the package from CRAN with:"
   },
   {
-    "objectID": "posts/REDCapTidieR_v1.0.0.html#the-early-beginnings",
-    "href": "posts/REDCapTidieR_v1.0.0.html#the-early-beginnings",
-    "title": "REDCapTidieR 1.0.0 🎉",
-    "section": "The Early Beginnings",
-    "text": "The Early Beginnings\nAs with most software solutions, the motivation for creating REDCapTidieR began with frustration. At the Children’s Hospital of Philadelphia, the CGT Informatics team supports a number of REDCap databases responsible for clinical trial data by providing applications, dashboards, and reports to principal investigators for their respective studies. It became clear after the first few interactions with these longitudinal datasets, that we were quickly repeating mundane operations to tidy up the data outputs of REDCap into usable, reportable formats.\nAs avid R users and subscribers to “tidy data,” we quickly realized how unwieldy the standard REDCap block matrix output was and that there was an opportunity to reshape it into a format that aligns with tidy data principles. After assessing the landscape of REDCap tools available for programmatic interaction, we found that there wasn’t a truly tidy framework in R that could support reformatting the block matrix, and so we got to work at designing our own."
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#development-journey",
+    "href": "posts/REDCapTidieR_v1.0.0.html#development-journey",
+    "title": "REDCapTidieR 1.0.0 & JOSS Publication 🎉",
+    "section": "Development Journey",
+    "text": "Development Journey\nThe humble beginnings of REDCapTidieR started with a single request to compile multiple REDCap projects for clinical trials into an analytic visualization tool. It became quickly apparent after working with the first couple of longitudinal databases that we were repeating the same operations to tackle REDCap’s standard, notorious block matrix and that no real solutions existed in the open source R community for handling complex REDCap databases that suited our needs.\nTo write the package, some core decisions had to be made up front. As a team rooted in tidy data principles, we wanted to ensure that outputs from our package corresponded with definitions for tidy rectangular data structures. Since the block matrix fundamentally obscures granularity in projects containing repeating events and repeating instruments, it was important to identify the composite primary keys that defined tables of varying project structures and isolate them from the block matrix while keeping them easily joinable.\nWe wanted a way to not only break out instruments into tidy tables, but also to house them under an easy-to-use structure. Thus the supertibble was born to leverage the accessibility of tibble’s elegant dataframes with the flexibility of nested list elements. This gave us even more room to grow by providing metadata to our users for quick exploratory data analysis of their projects.\n\n\n\nSupertibble\n\n\nOnce the core concept was ironed out, REDCapTidieR was further adapted to give users more tools to work with their exported databases, including labelling their data with the labelled package, exporting their data to Excel with openxlsx2, and getting summary statistics with skimr."
   },
   {
-    "objectID": "posts/REDCapTidieR_v1.0.0.html#not-a-bird-not-a-plane-but-a-supertibble",
-    "href": "posts/REDCapTidieR_v1.0.0.html#not-a-bird-not-a-plane-but-a-supertibble",
-    "title": "REDCapTidieR 1.0.0 🎉",
-    "section": "Not a Bird, Not a Plane, but a Supertibble",
-    "text": "Not a Bird, Not a Plane, but a Supertibble\nIn order to accommodate tidy data principles, the new format of the block matrix had to meet the following criteria:\n\nEach variable had to form a column\nEach observation had to form a row\nEach type of observational unit had to form a table\n\nWhile the block matrix can be considered to pass the first two criteria, longitudinal REDCap projects that contain repeating instruments and events result in inconsistent granularity between rows. To reintroduce consistency, we needed to break apart the block matrix into sub-tables, i.e. data tibbles. This would allow us to handle the composite primary keys that make up the identifiers for repeating instruments and events by representing each instrument in an individual table with only the identifier columns necessary to form its key.\nApart from being fun to say, arriving at the “supertibble” was a natural next step for consolidating all of these data tibbles under one roof. The supertibble is the vehicle for containing a REDCap projects data tibbles, identified by instrument name, metadata tibbles, and various other pieces of information about the instrument. From here, users can easily join together the data they need for their use cases or take advantage of the bind_tibbles() / bind_tibble() functions to place them directly into their programming environment.\n\n\n\nLabelled Supertibble"
-  },
-  {
-    "objectID": "posts/REDCapTidieR_v1.0.0.html#extensions-and-additional-features",
-    "href": "posts/REDCapTidieR_v1.0.0.html#extensions-and-additional-features",
-    "title": "REDCapTidieR 1.0.0 🎉",
-    "section": "Extensions and Additional Features",
-    "text": "Extensions and Additional Features\nWe put a considerable amount of effort into making sure the user interface of REDCapTidieR is easy to use, easy to navigate, and suits most common needs. You wouldn’t believe the lengthy discussions had over the name of the package, the names of the core functions, and then the names of the updated core functions when we realized we didn’t like the ones we chose anymore. Once we solidified the core functionality, we expanded REDCapTidieR’s capabilities.\nFirst we incorporated variable labels support through the labelled package. With a simple call to make_labelled(), users can effortlessly enhance data readability, allowing for easier interpretation and analysis by adding labels to their data tibbles.\n\n\n\nLabelled Tibble\n\n\nBy tapping into the openxlsx2 package, we opened the sueprtibble up to XLSX export capability. By using write_redcap_xlsx(), users can immediately conver their data tibbles to spreadsheets where each data tibble comprises its own XLSX sheet, expanding the flexibility of data management that REDCapTidieR can provide."
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#joss-publication",
+    "href": "posts/REDCapTidieR_v1.0.0.html#joss-publication",
+    "title": "REDCapTidieR 1.0.0 & JOSS Publication 🎉",
+    "section": "JOSS Publication",
+    "text": "JOSS Publication\nREDCapTidieR has become a useful tool to many analysts working in REDCap and R, and to showcase our commitment to the package and its development we published “REDCapTideR: Extracting complex REDCap databases into tidy tables” in The Journal of Open Source Software. This technical paper will provide you with even greater detail to our design decisions and the ways in which REDCapTidieR fills a unique role in the research space."
   },
   {
     "objectID": "posts/REDCapTidieR_v1.0.0.html#acknolwedgements",
     "href": "posts/REDCapTidieR_v1.0.0.html#acknolwedgements",
-    "title": "REDCapTidieR 1.0.0 🎉",
+    "title": "REDCapTidieR 1.0.0 & JOSS Publication 🎉",
     "section": "Acknolwedgements",
-    "text": "Acknolwedgements\nREDCapTidieR is the first open source package our team has made available to the community. The success of it wouldn’t be possible without the support and collaboration of the those who helped with its development, opened issues, or contributed to discussions: @camcaan, @JanMarvin, @matthieu-faron, @olivroy, @pwildenhain, @tschuler, @wibeasley."
+    "text": "Acknolwedgements\nREDCapTidieR is the first open source package our team has made available to the community. To date, we are in awe that we have surpassed over five thousands downloads and see that number grow every day. The success of it wouldn’t be possible without the support and collaboration of the those who helped with its development, opened issues, and contributed to discussions: @camcaan, @JanMarvin, @matthieu-faron, @olivroy, @pwildenhain, @tschuler, @wibeasley."
   },
   {
-    "objectID": "posts/REDCapTidieR_v1.0.0.html#miscellaneous",
-    "href": "posts/REDCapTidieR_v1.0.0.html#miscellaneous",
-    "title": "REDCapTidieR 1.0.0 🎉",
-    "section": "Miscellaneous",
-    "text": "Miscellaneous\n\nUpdated any functions that relied on openxlsx2 to use the newest stable functions of its 1.0 release\nInternal package cleaning and consolidation\nUpdates to the pkgdown site"
+    "objectID": "posts/REDCapTidieR_v1.0.0.html#next-steps",
+    "href": "posts/REDCapTidieR_v1.0.0.html#next-steps",
+    "title": "REDCapTidieR 1.0.0 & JOSS Publication 🎉",
+    "section": "Next Steps",
+    "text": "Next Steps\nWe aren’t done developing REDCapTidieR, and have some ideas in store for the next releases of it including:\n\nCodebook support\nAllowance for instruments that are both repeating and non-repeating\nAdditional functions for extracting REDCap project information\n\nHave a feature you want to see? Please open an issue and let us know how we can continue making this package even better!"
   },
   {
     "objectID": "posts/REDCapTidieR_v0.2.html",
@@ -207,6 +200,6 @@
     "href": "posts.html",
     "title": "Posts",
     "section": "",
-    "text": "REDCapTidieR 1.0.0 🎉\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v1.0.0 Release Announcement\n\n\n\n\n\n\nNov 15, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.4.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.4.0 Release Announcement\n\n\n\n\n\n\nJun 7, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.3.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.3.0 Release Announcement\n\n\n\n\n\n\nFeb 28, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nDec 6, 2022\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
+    "text": "REDCapTidieR 1.0.0 & JOSS Publication 🎉\n\n\n\n\n\n\n\nOpen Source\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v1.0.0 Release and JOSS Publication Announcement\n\n\n\n\n\n\nNov 15, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.4.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.4.0 Release Announcement\n\n\n\n\n\n\nJun 7, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.3.0\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.3.0 Release Announcement\n\n\n\n\n\n\nFeb 28, 2023\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\n  \n\n\n\n\nREDCapTidieR 0.2.0 ☃️\n\n\n\n\n\n\n\nREDCap\n\n\nREDCapTidieR\n\n\nR\n\n\n\n\nREDCapTidieR v0.2.0 release announcement and change descriptions.\n\n\n\n\n\n\nDec 6, 2022\n\n\nStephan Kadauke, Ezra Porter, Richard Hanna\n\n\n\n\n\n\nNo matching items"
   }
 ]
