@@ -1,0 +1,50 @@
+---
+title: REDCapTidieR 1.0.0 & JOSS Publication 🎉
+image: images/REDCapTidieR.png
+author: Stephan Kadauke, Ezra Porter, Richard Hanna
+date: "2023-11-15"
+description: "REDCapTidieR v1.0.0 Release and JOSS Publication Announcement"
+categories:
+  - Open Source
+  - REDCap
+  - REDCapTidieR
+  - R
+---
+
+We're a bit overdue but positively delighted to announce that the v1.0.0 version of [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) has been released on CRAN! And we published our paper ["REDCapTideR: Extracting complex REDCap databases into tidy tables"](https://joss.theoj.org/papers/10.21105/joss.06277) in **The Journal of Open Source Software** (JOSS)!
+
+You can install the package from CRAN with:
+
+```{r, eval = FALSE}
+install.packages("REDCapTidieR")
+```
+
+## Development Journey
+
+REDCapTidieR arose from a seemingly simple requirement to compile data from multiple REDCap projects of [CAR-T cell](https://en.wikipedia.org/wiki/CAR_T_cell) clinical trials into a dynamic analysis and visualization tool. We quickly realized, as many before us had, that when you start using longitudinal databases with repeating instruments and events, this can become extremely cumbersome. The [block matrix](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix) format which squeezes the data from all instruments into one ugly table with varying granularity and lots of empty fields is notoriously difficult to work with. No real solutions existed for handling complex REDCap databases in R that suited our needs.
+
+To write the package, we had to make some core decisions up front. Our team embraces [tidy](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#tidy) data principles, and so we wanted to ensure that our package gels well with tidy rectangular data structures. A major issue with data from complex databases is that that the [granularity](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#granularity) may not be uniform if some data is variable on a per-record, per-instance, or per-event level. This fundamentally violates the tidy data principle that requires that each table row represents an observation of the same thing. However, *within* each instrument, the granularity is uniform. We took advantage of this fact and broke down the block matrix into tables, one for each instrument. And along the way we made some automated data transformations that make it easier to work with the data in the R programming environment.
+
+We wanted a way to not only break out instruments into tidy tables, but also to make them accessible using an easy-to-use superstructure. So we created the [supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble) which provides a handy overview of the instruments of the REDCap project and allows drilling down into the individual data tables.
+
+![Supertibble](images/labelled_supertibble.png){fig-alt="Labelled Supertibble"}
+
+Once we had ironed out the data structure, we wrote a set of utility functions to allow users to efficiently work with their exported databases, including [labelling their data with the `labelled` package](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package), [exporting their data to Excel with `openxlsx2`](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/export_to_xlsx.html), and getting [summary statistics with `skimr`](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-summary-statistics-to-the-metadata-with-the-skimr-package).
+
+## JOSS Publication
+
+REDCapTidieR has become a useful tool to many analysts working in REDCap and R. To showcase our commitment to the package and its development we published ["REDCapTideR: Extracting complex REDCap databases into tidy tables"](https://joss.theoj.org/papers/10.21105/joss.06277) in The Journal of Open Source Software. We believe that REDCapTidieR can cut down on thousands of analyst hours spent doing tedious repetitive analytic work, and so we hope that this brief technical paper will extend the reach of our package.
+
+## Acknowledgements
+
+REDCapTidieR is the first open source package [our team](https://www.chop.edu/centers-programs/cell-and-gene-therapy-informatics-team) has made available to the community. To date, we are in awe that we have surpassed over **five thousand downloads** and see that number grow every day. The success of it wouldn't be possible without the support and collaboration of the those who helped with its development, opened issues, and contributed to discussions: [@camcaan](https://github.com/camcaan), [@JanMarvin](https://github.com/JanMarvin), [@matthieu-faron](https://github.com/matthieu-faron), [@olivroy](https://github.com/olivroy), [@pwildenhain](https://github.com/pwildenhain), [@tschuler](https://github.com/tschuler), [@wibeasley](https://github.com/wibeasley).
+
+## Next Steps
+
+We aren't done developing REDCapTidieR, and have some ideas in store for the next releases of it including:
+
+- Codebook support
+- Allowance for instruments that are both repeating and non-repeating
+- Additional functions for extracting REDCap project information
+
+Have a feature you want to see? Please [open an issue](https://github.com/CHOP-CGTInformatics/REDCapTidieR/issues) and let us know how we can continue making this package even better!

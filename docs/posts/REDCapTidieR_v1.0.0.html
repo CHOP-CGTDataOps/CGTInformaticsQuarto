@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Stephan Kadauke, Ezra Porter, Richard Hanna">
+<meta name="dcterms.date" content="2023-11-15">
+<meta name="description" content="REDCapTidieR v1.0.0 Release and JOSS Publication Announcement">
+
+<title>Cell and Gene Therapy Informatics - REDCapTidieR 1.0.0 &amp; JOSS Publication 🎉</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/cgt_informatics_bg_removed.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Cell and Gene Therapy Informatics</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../posts.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/CHOP-CGTInformatics"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#development-journey" id="toc-development-journey" class="nav-link active" data-scroll-target="#development-journey">Development Journey</a></li>
+  <li><a href="#joss-publication" id="toc-joss-publication" class="nav-link" data-scroll-target="#joss-publication">JOSS Publication</a></li>
+  <li><a href="#acknolwedgements" id="toc-acknolwedgements" class="nav-link" data-scroll-target="#acknolwedgements">Acknolwedgements</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">REDCapTidieR 1.0.0 &amp; JOSS Publication 🎉</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Open Source</div>
+    <div class="quarto-category">REDCap</div>
+    <div class="quarto-category">REDCapTidieR</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    REDCapTidieR v1.0.0 Release and JOSS Publication Announcement
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Stephan Kadauke, Ezra Porter, Richard Hanna </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>We’re a bit overdue, but delighted to announce that the v1.0.0 version of <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/">REDCapTidieR</a> has been released to CRAN! Additionally, we have officially published our first paper in <strong>The Journal of Open Source Software</strong> (JOSS) under <a href="https://joss.theoj.org/papers/10.21105/joss.06277">“REDCapTideR: Extracting complex REDCap databases into tidy tables”</a>.</p>
+<p>You can install the package from CRAN with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"REDCapTidieR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="development-journey" class="level2">
+<h2 class="anchored" data-anchor-id="development-journey">Development Journey</h2>
+<p>The humble beginnings of REDCapTidieR started with a single request to compile multiple REDCap projects for clinical trials into an analytic visualization tool. It became quickly apparent after working with the first couple of longitudinal databases that we were repeating the same operations to tackle REDCap’s standard, notorious <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix">block matrix</a> and that no real solutions existed in the open source R community for handling complex REDCap databases that suited our needs.</p>
+<p>To write the package, some core decisions had to be made up front. As a team rooted in <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#tidy">tidy</a> data principles, we wanted to ensure that outputs from our package corresponded with definitions for tidy rectangular data structures. Since the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#block-matrix">block matrix</a> fundamentally obscures <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#granularity">granularity</a> in projects containing <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-event">repeating events</a> and <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#repeating-instrument">repeating instruments</a>, it was important to identify the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#composite-primary-key">composite primary key</a>s that defined tables of varying project structures and isolate them from the block matrix while keeping them easily joinable.</p>
+<p>We wanted a way to not only break out instruments into tidy tables, but also to house them under an easy-to-use structure. Thus the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/glossary.html#supertibble">supertibble</a> was born to leverage the accessibility of <a href="https://tibble.tidyverse.org/">tibble</a>’s elegant dataframes with the flexibility of nested list elements. This gave us even more room to grow by providing metadata to our users for quick exploratory data analysis of their projects.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/labelled_supertibble.png" class="img-fluid figure-img" alt="Labelled Supertibble"></p>
+<p></p><figcaption class="figure-caption">Supertibble</figcaption><p></p>
+</figure>
+</div>
+<p>Once the core concept was ironed out, REDCapTidieR was further adapted to give users more tools to work with their exported databases, including <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-variable-labels-with-the-labelled-package">labelling their data with the <code>labelled</code> package</a>, <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/export_to_xlsx.html">exporting their data to Excel with <code>openxlsx2</code></a>, and getting <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#adding-summary-statistics-to-the-metadata-with-the-skimr-package">summary statistics with <code>skimr</code></a>.</p>
+</section>
+<section id="joss-publication" class="level2">
+<h2 class="anchored" data-anchor-id="joss-publication">JOSS Publication</h2>
+<p>REDCapTidieR has become a useful tool to many analysts working in REDCap and R, and to showcase our commitment to the package and its development we published <a href="https://joss.theoj.org/papers/10.21105/joss.06277">“REDCapTideR: Extracting complex REDCap databases into tidy tables”</a> in The Journal of Open Source Software. This technical paper will provide you with even greater detail to our design decisions and the ways in which REDCapTidieR fills a unique role in the research space.</p>
+</section>
+<section id="acknolwedgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknolwedgements">Acknolwedgements</h2>
+<p>REDCapTidieR is the first open source package our team has made available to the community. To date, we are in awe that we have surpassed over <strong>five thousands downloads</strong> and see that number grow every day. The success of it wouldn’t be possible without the support and collaboration of the those who helped with its development, opened issues, and contributed to discussions: <a href="https://github.com/camcaan"><span class="citation" data-cites="camcaan">@camcaan</span></a>, <a href="https://github.com/JanMarvin"><span class="citation" data-cites="JanMarvin">@JanMarvin</span></a>, <a href="https://github.com/matthieu-faron"><span class="citation" data-cites="matthieu-faron">@matthieu-faron</span></a>, <a href="https://github.com/olivroy"><span class="citation" data-cites="olivroy">@olivroy</span></a>, <a href="https://github.com/pwildenhain"><span class="citation" data-cites="pwildenhain">@pwildenhain</span></a>, <a href="https://github.com/tschuler"><span class="citation" data-cites="tschuler">@tschuler</span></a>, <a href="https://github.com/wibeasley"><span class="citation" data-cites="wibeasley">@wibeasley</span></a>.</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>We aren’t done developing REDCapTidieR, and have some ideas in store for the next releases of it including:</p>
+<ul>
+<li>Codebook support</li>
+<li>Allowance for instruments that are both repeating and non-repeating</li>
+<li>Additional functions for extracting REDCap project information</li>
+</ul>
+<p>Have a feature you want to see? Please <a href="https://github.com/CHOP-CGTInformatics/REDCapTidieR/issues">open an issue</a> and let us know how we can continue making this package even better!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">
+        <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Made with ❤️ in Philadelphia
+  </li>  
+</ul>
+      </div>
+  </div>
+</footer>
+
+
+
+</body></html>
